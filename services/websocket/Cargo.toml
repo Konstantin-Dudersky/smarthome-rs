@@ -1,0 +1,14 @@
+[package]
+name = "websocket"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+tracing = { workspace = true }
+
+env_vars = { workspace = true }
+logging = { workspace = true }
+messages = { workspace = true }
+websocket-lib = { workspace = true }

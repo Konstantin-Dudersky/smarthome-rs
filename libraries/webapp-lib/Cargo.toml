@@ -1,0 +1,11 @@
+[package]
+name = "webapp-lib"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+futures-util = { workspace = true }
+gloo = { workspace = true }
+leptos = { workspace = true }
+url = { workspace = true }
+web-sys = { workspace = true }

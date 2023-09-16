@@ -1,0 +1,15 @@
+[package]
+name = "db_saver"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+sqlx = { workspace = true }
+tracing = { workspace = true }
+tokio = { workspace = true }
+
+env_vars = { workspace = true }
+logging = { workspace = true }
+messages = { workspace = true }
+redis-client-lib = { workspace = true }
+db-saver-lib = { workspace = true }

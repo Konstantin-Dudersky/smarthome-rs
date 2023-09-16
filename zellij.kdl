@@ -1,0 +1,84 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    tab name="root" cwd="." {
+        pane {
+            stacked true
+            pane {
+                name "general"
+            }
+            pane {
+                name "docker compose"
+                command "docker"
+                args "compose" "up" "-d"
+                start_suspended true
+            }
+        }
+    }
+
+    tab name="api" cwd="./services/api" {
+        pane split_direction="vertical" {
+            pane {
+                name "cargo run"
+                command "cargo"
+                args "run"
+                start_suspended true
+            }
+            pane { }
+        }
+    }
+
+    tab name="db-saver" cwd="./services/db-saver" {
+    }
+
+    tab name="opcua-client" cwd="./services/opcua-client" {
+        pane split_direction="vertical" {
+            pane {
+                name "cargo run"
+                command "cargo"
+                args "run"
+                start_suspended true
+            }
+            pane { }
+        }
+    }
+
+    tab name="webapp" cwd="./services/webapp" {
+        pane split_direction="vertical" {
+            pane split_direction="horizontal" {
+                pane {
+                    name "trunk serve"
+                    command "trunk"
+                    args "serve" "--open"
+                    start_suspended true
+                }
+                pane {
+                    name "tailwind watch"
+                    command "npx"
+                    args "tailwindcss" "-i" "./input.css" "-o" "./style/output.css" "--watch"
+                }
+            }
+            pane { }
+        }
+    }
+
+    tab name="websocket" cwd="./services/websocket" {
+        pane split_direction="vertical" {
+            pane {
+                name "cargo run"
+                command "cargo"
+                args "run"
+                start_suspended true
+            }
+            pane { }
+        }
+    }
+}
