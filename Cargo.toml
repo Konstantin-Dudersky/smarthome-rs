@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "libraries/db-saver-lib",
+    "./libraries/env-vars-lib",
     "libraries/opcua-client-lib",
     "libraries/redis-client-lib",
     "libraries/webapp-lib",
@@ -18,11 +19,21 @@ resolver = "2"
 
 
 [workspace.dependencies]
-chrono = { version = "0.4", features = ["serde"] }
 opcua = { version = "0.11", features = ["client"] }
 redis = { version = "0.23.2", features = ["tokio-comp"] }
 tokio = { version = "1", features = ["full"] }
 tokio-util = { version = "0.7" }
+
+# типы данных
+chrono = { version = "0.4", features = ["serde"] }
+url = { version = "2.4", features = ["serde"] }
+
+# CLI
+clap = { version = "4.4", features = ["derive"] }
+
+# для кросс-компиляции
+openssl = { version = "0.10", features = ["vendored"] }
+
 # для асинхронной подписки PubSub в Redis
 futures-util = { version = "0.3" }
 sqlx = { version = "0.7", features = [
@@ -55,10 +66,10 @@ envy = { version = "0.4" }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1" }
 toml = { version = "0.8" }
-url = { version = "2.4", features = ["serde"] }
 
 # мои пакеты
 db-saver-lib = { path = "./libraries/db-saver-lib" }
+env-vars-lib = { path = "./libraries/env-vars-lib" }
 opcua-client-lib = { path = "./libraries/opcua-client-lib" }
 redis-client-lib = { path = "./libraries/redis-client-lib" }
 webapp-lib = { path = "./libraries/webapp-lib" }

@@ -2,4 +2,21 @@
 
 Список переменных задается в структуре Config в файле `src/config.rs`
 
-Также можно создать файл с настройками по-умолчанию - `cargo run --bin env_vars`
+## Команды
+
+### Cоздать / обновить файл .env.example
+
+```bash
+cargo run --bin env_vars create
+```
+
+Создает файл `.env.example` со значениями по-умолчанию
+
+### Проверить файл .env
+
+```bash
+cargo run --bin env_vars check
+```
+
+1. Пытается загрузить файл `.env`
+2. Читает настройки в структуру `src/config.rs`
