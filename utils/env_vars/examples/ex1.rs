@@ -1,6 +1,6 @@
-use env_vars::load;
+use env_vars::load_config;
 
 fn main() {
-    let config = load();
+    let config = load_config();
     println!("{:#?}", config);
 }

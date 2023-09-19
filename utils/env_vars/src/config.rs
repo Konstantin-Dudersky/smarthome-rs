@@ -3,12 +3,14 @@ use std::str::FromStr;
 use serde::{Deserialize, Serialize};
 use url::Url;
 
-use crate::{errors::Errors, load_env_vars};
+use env_vars_lib::{load_env_vars, Errors};
 
-pub fn load() -> Result<Config, Errors> {
-    load_env_vars::load_env_vars()
+/// Загружаем настройки из переменных окружения из файла .env
+pub fn load_config() -> Result<Config, Errors> {
+    load_env_vars()
 }
 
+/// Настройки системы
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Config {
     pub api_ws_port: u16,

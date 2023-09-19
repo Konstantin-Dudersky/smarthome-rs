@@ -2,14 +2,12 @@
 members = [
     "libraries/db-saver-lib",
     "./libraries/env-vars-lib",
-    "libraries/opcua-client-lib",
     "libraries/redis-client-lib",
     "libraries/webapp-lib",
     "libraries/websocket-lib",
     "services/api",
     "services/websocket",
     "services/db-saver",
-    "services/opcua-client",
     "services/webapp",
     "utils/env_vars",
     "utils/logging",
@@ -19,10 +17,13 @@ resolver = "2"
 
 
 [workspace.dependencies]
-opcua = { version = "0.11", features = ["client"] }
 redis = { version = "0.23.2", features = ["tokio-comp"] }
-tokio = { version = "1", features = ["full"] }
-tokio-util = { version = "0.7" }
+sqlx = { version = "0.7", features = [
+    "chrono",
+    "macros",
+    "postgres",
+    "runtime-tokio",
+] }
 
 # типы данных
 chrono = { version = "0.4", features = ["serde"] }
@@ -34,14 +35,10 @@ clap = { version = "4.4", features = ["derive"] }
 # для кросс-компиляции
 openssl = { version = "0.10", features = ["vendored"] }
 
-# для асинхронной подписки PubSub в Redis
+# асинхронщина
 futures-util = { version = "0.3" }
-sqlx = { version = "0.7", features = [
-    "chrono",
-    "macros",
-    "postgres",
-    "runtime-tokio",
-] }
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7" }
 
 # api
 axum = { version = "0.6" }
@@ -70,7 +67,6 @@ toml = { version = "0.8" }
 # мои пакеты
 db-saver-lib = { path = "./libraries/db-saver-lib" }
 env-vars-lib = { path = "./libraries/env-vars-lib" }
-opcua-client-lib = { path = "./libraries/opcua-client-lib" }
 redis-client-lib = { path = "./libraries/redis-client-lib" }
 webapp-lib = { path = "./libraries/webapp-lib" }
 websocket-lib = { path = "./libraries/websocket-lib" }

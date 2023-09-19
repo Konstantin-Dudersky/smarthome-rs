@@ -9,6 +9,8 @@ pub enum Errors {
     DeserializeError(String),
     SerializeError(String),
     IoError(String),
+    /// Ошибка преобразования переменных в верхний регистр
+    ToUppercase(String),
 }
 
 impl From<DotenvyError> for Errors {

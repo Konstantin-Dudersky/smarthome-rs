@@ -1,9 +1,11 @@
 use clap::Parser;
-use tracing::{info, warn};
+use tracing::info;
 
-use env_vars::{create_env_file, Config};
-use env_vars::{load, Er};
-use env_vars_lib::{Cli, Commands};
+use env_vars_lib::{create_env_file, load_env_vars, Cli, Commands, Errors};
+
+use env_vars::Config;
+
+const ENV_EXAMPLE_FILE: &str = ".env.example";
 
 fn main() {
     tracing_subscriber::fmt().init();
@@ -13,24 +15,23 @@ fn main() {
         Some(value) => value,
         None => todo!(),
     };
-    match value {
+    let command = match value {
         Commands::Create => command_create(),
         Commands::Check => command_check(),
-    }
-}
-
-fn command_create() {
-    create_env_file::<Config>(".env.example").unwrap()
-}
-
-fn command_check() -> Result {
-    info!("Пробуем загрузить файл .env");
-    let config = match load() {
-        Ok(val) => val,
-        Err(err) => {
-            warn!("{:?}", err);
-            return;
-        }
     };
+    command.unwrap();
+}
+
+fn command_create() -> Result<(), Errors> {
+    info!("Создаем файл {}", ENV_EXAMPLE_FILE);
+    let result = create_env_file::<Config>(ENV_EXAMPLE_FILE)?;
+    info!("Файл {} создан", ENV_EXAMPLE_FILE);
+    Ok(result)
+}
+
+fn command_check() -> Result<(), Errors> {
+    info!("Пробуем загрузить файл .env");
+    let config = load_env_vars::<Config>()?;
     info!("Загружены настройки: {:#?}", config);
+    Ok(())
 }

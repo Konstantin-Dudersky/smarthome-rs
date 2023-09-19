@@ -5,7 +5,7 @@ use envy::from_env;
 use serde::de::DeserializeOwned;
 use tracing::{error, info};
 
-use crate::errors::Errors;
+use crate::Errors;
 
 /// Загрузить переменные окружения, в т.ч. из файла .env
 pub fn load_env_vars<T>() -> Result<T, Errors>

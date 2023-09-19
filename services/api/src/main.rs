@@ -7,7 +7,7 @@ use api::app;
 
 #[tokio::main]
 async fn main() {
-    let config = env_vars::load().expect("Setting not loaded");
+    let config = env_vars::load_config().expect("Setting not loaded");
 
     configure_logging("api", config.loki_url.as_str(), Level::INFO)
         .await
