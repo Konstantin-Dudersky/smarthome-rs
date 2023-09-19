@@ -29,8 +29,8 @@ where
 fn lines_to_upper(input: &str) -> Result<String, Errors> {
     let mut output = input
         .split('\n')
-        .filter(|s| s.len() > 0)
-        .map(|v| line_to_upper(v))
+        .filter(|s| !s.is_empty())
+        .map(line_to_upper)
         .collect::<Result<Vec<String>, _>>()?;
     output.push("".to_string());
     Ok(output.join("\n"))

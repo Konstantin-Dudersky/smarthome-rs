@@ -32,7 +32,7 @@ impl Row {
         value: f64,
     ) -> Self {
         Self {
-            ts: ts,
+            ts,
             entity: entity.to_string(),
             attr: attr.to_string(),
             value: Some(value),

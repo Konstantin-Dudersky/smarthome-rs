@@ -24,9 +24,9 @@ fn main() {
 
 fn command_create() -> Result<(), Errors> {
     info!("Создаем файл {}", ENV_EXAMPLE_FILE);
-    let result = create_env_file::<Config>(ENV_EXAMPLE_FILE)?;
+    create_env_file::<Config>(ENV_EXAMPLE_FILE)?;
     info!("Файл {} создан", ENV_EXAMPLE_FILE);
-    Ok(result)
+    Ok(())
 }
 
 fn command_check() -> Result<(), Errors> {

@@ -28,8 +28,6 @@ pub struct Config {
     pub loki_port: u16,
     pub loki_url: Url,
 
-    pub opcua_url: Url,
-
     pub redis_channel: String,
     pub redis_port: u16,
     pub redis_url: Url,
@@ -44,11 +42,9 @@ impl Default for Config {
 
             loki_port: 3100,
             loki_url: Url::from_str("http://localhost:3100").unwrap(),
-            opcua_url: Url::from_str("opc.tcp://192.168.101.180:4840/")
-                .unwrap(),
 
             database_url: Url::from_str(
-                "postgres://postgres:password@localhost:5432/db_data_test",
+                "postgres://DB_USER:DB_PASSWORD@DB_HOST:5432/db_data_test",
             )
             .unwrap(),
 

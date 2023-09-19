@@ -3,7 +3,7 @@ use tokio::{main, spawn, sync::mpsc};
 use tracing::Level;
 
 use db_saver_lib::save_row_in_db;
-use env_vars;
+use env_vars::load_config;
 use logging::configure_logging;
 use messages::Messages;
 use redis_client_lib::start_redis_subscription_async;
@@ -12,7 +12,7 @@ mod config;
 
 #[main]
 async fn main() {
-    let config = env_vars::load().expect("Settings not loaded");
+    let config = load_config().expect("Settings not loaded");
 
     configure_logging("db-saver", config.loki_url.as_str(), Level::INFO)
         .await
