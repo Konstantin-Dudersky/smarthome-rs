@@ -61,6 +61,17 @@ services:
     networks:
       - demo_siemens_to_web_net
 
+  portainer:
+    container_name: portainer
+    hostname: portainer
+    image: portainer/portainer-ce:latest
+    ports:
+      - "${PORTAINER_PORT}:9000"
+    restart: always
+    volumes:
+      - portainer_data_volume:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
   webapp:
     container_name: webapp
     hostname: webapp
@@ -73,3 +84,5 @@ services:
 volumes:
   db_volume:
     name: db_volume
+  portainer_data_volume:
+    name: portainer_data_volume

@@ -28,6 +28,8 @@ pub struct Config {
     pub loki_port: u16,
     pub loki_url: Url,
 
+    pub portainer_port: u16,
+
     pub redis_channel: String,
     pub redis_port: u16,
     pub redis_url: Url,
@@ -54,6 +56,8 @@ impl Default for Config {
             db_password: "postgres".to_string(),
 
             grafana_port: 3000,
+
+            portainer_port: 8001,
 
             redis_channel: Default::default(),
             redis_port: 6379,
