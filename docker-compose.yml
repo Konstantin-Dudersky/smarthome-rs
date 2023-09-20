@@ -1,10 +1,28 @@
 version: "3.8"
-name: demo_siemens_to_web
+name: smarthome
 
 networks:
-  demo_siemens_to_web_net:
+  smarthome_net:
 
 services:
+  deconz_hub:
+    container_name: deconz_hub
+    devices:
+      - /dev/ttyACM0
+    environment:
+      - DECONZ_VNC_MODE=1
+      - DECONZ_VNC_PASSWORD=${DECONZ_HUB_VNC_PASSWORD}
+    hostname: deconz_hub
+    image: deconzcommunity/deconz:2.24.0
+    ports:
+      - "${DECONZ_HUB_PORT_API}:80"
+      - "${DECONZ_HUB_PORT_WS}:443"
+      - "${DECONZ_HUB_PORT_VNC}:5900"
+    privileged: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - deconz_hub_volume:/opt/deCONZ
+
   redis:
     container_name: redis
     hostname: redis
@@ -21,7 +39,7 @@ services:
       - "${LOKI_PORT}:3100"
     command: -config.file=/etc/loki/local-config.yaml
     networks:
-      - demo_siemens_to_web_net
+      - smarthome_net
 
   grafana:
     container_name: grafana
@@ -39,7 +57,7 @@ services:
       - ./services/grafana/datasources:/etc/grafana/provisioning/datasources
       - ./services/grafana/dashboards:/etc/grafana/provisioning/dashboards
     networks:
-      - demo_siemens_to_web_net
+      - smarthome_net
 
   db:
     container_name: db
@@ -59,7 +77,7 @@ services:
       - ./services/db/pg_hba.conf:/etc/postgresql/pg_hba.conf
       - ./services/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - demo_siemens_to_web_net
+      - smarthome_net
 
   portainer:
     container_name: portainer
@@ -84,5 +102,7 @@ services:
 volumes:
   db_volume:
     name: db_volume
+  deconz_hub_volume:
+    name: deconz_hub_volume
   portainer_data_volume:
     name: portainer_data_volume

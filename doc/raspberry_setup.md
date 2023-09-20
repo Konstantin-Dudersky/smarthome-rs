@@ -9,19 +9,9 @@ sudo apt update && sudo apt upgrade
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # nushell ----------------------------------------------------------------------
-sudo apt install pkg-config libssl-dev
-sudo apt install build-essential
+sudo apt -y install pkg-config libssl-dev
+sudo apt -y install build-essential
 cargo install nu just
-
-# монтирование внешнего диска --------------------------------------------------
-# создаем папку
-sudo mkdir /mnt/external
-# находим UUID
-sudo blkid
-# добавляем в файл /etc/fstab
-# UUID=__UUID__  /mnt/external  ext4  defaults  0  2
-# проверка
-sudo mount -a
 
 # docker -----------------------------------------------------------------------
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -35,12 +25,6 @@ docker run hello-world
 # autostart
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
-# change directory
-sudo systemctl stop docker
-sudo systemctl stop docker.socket
-sudo systemctl stop containerd
-sudo mkdir -p /mnt/external/docker
-# отредактировать файл /etc/docker/daemon.json
-# { "data-root": "/mnt/external/docker" }
-sudo systemctl start docker
+
+# TODO копируем код, создаем .env файл
 ```

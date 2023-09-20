@@ -760,11 +760,8 @@ name = "env_vars"
 version = "0.0.1"
 dependencies = [
  "clap",
- "dotenvy",
  "env-vars-lib",
- "envy",
  "serde",
- "toml 0.8.0",
  "tracing",
  "tracing-subscriber",
  "url",
