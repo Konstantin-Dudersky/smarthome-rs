@@ -36,7 +36,7 @@ async fn main() {
         .unwrap();
     });
 
-    let _ = spawn(async move {
+    let sp2 = spawn(async move {
         let pool = PgPoolOptions::new()
             .max_connections(5)
             .connect(&db_url)
@@ -51,4 +51,5 @@ async fn main() {
     });
 
     sp1.await.unwrap();
+    sp2.await.unwrap();
 }

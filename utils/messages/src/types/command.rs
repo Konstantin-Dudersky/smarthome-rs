@@ -13,7 +13,7 @@ impl Command {
             Some(value) => value,
             None => Utc::now().into(),
         };
-        Self { ts: ts }
+        Self { ts }
     }
 }
 

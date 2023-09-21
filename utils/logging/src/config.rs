@@ -9,7 +9,7 @@ pub async fn configure_logging(
     loki_url: &str,
     min_level: Level,
 ) -> Result<(), Errors> {
-    let min_level_clone = min_level.clone();
+    let min_level_clone = min_level;
     let my_filter = FilterFn::new(move |metadata| {
         let level = *metadata.level();
         let module_path = metadata.module_path().unwrap_or_default();

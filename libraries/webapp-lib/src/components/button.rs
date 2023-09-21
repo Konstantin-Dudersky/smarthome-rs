@@ -3,7 +3,7 @@ use leptos::*;
 #[component]
 pub fn Button<T>(label: String, on_click: T) -> impl IntoView
 where
-    T: Fn() -> () + 'static + Copy,
+    T: Fn() + 'static + Copy,
 {
     view! {
         <div

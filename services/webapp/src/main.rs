@@ -94,7 +94,7 @@ fn App2() -> impl IntoView {
 }
 
 pub fn main() {
-    provide_context(GlobalState::new());
+    provide_context(GlobalState::default());
     let global_state = use_context::<GlobalState>().expect("no global state");
 
     let window_url =

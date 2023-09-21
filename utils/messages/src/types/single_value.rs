@@ -14,9 +14,6 @@ impl<T> SingleValue<T> {
             Some(value) => value,
             None => Utc::now().into(),
         };
-        Self {
-            value: value,
-            ts: ts,
-        }
+        Self { value, ts }
     }
 }

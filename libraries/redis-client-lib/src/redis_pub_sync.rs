@@ -18,7 +18,7 @@ impl RedisPubSync {
         let client = redis::Client::open(url)?;
         let connection = client.get_connection()?;
         Ok(Self {
-            connection: connection,
+            connection,
             channel: channel.to_string(),
         })
     }

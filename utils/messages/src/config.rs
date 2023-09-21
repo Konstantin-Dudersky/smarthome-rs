@@ -21,7 +21,7 @@ impl Messages {
     /// Ключ для сохранения в базе данных
     pub fn key(&self) -> String {
         let full_str = self.to_string();
-        let parenth_index = full_str.find("(");
+        let parenth_index = full_str.find('(');
         let full_str: String = match parenth_index {
             Some(value) => full_str.chars().take(value).collect(),
             None => full_str,

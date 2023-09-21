@@ -14,8 +14,8 @@ pub struct GlobalState {
     pub motor_state: RwSignal<types::SingleValue<i16>>,
 }
 
-impl GlobalState {
-    pub fn new() -> Self {
+impl Default for GlobalState {
+    fn default() -> Self {
         Self {
             send_msg: create_rw_signal(None),
             window_url: create_rw_signal(
@@ -31,7 +31,7 @@ impl GlobalState {
 
 pub fn process_ws_message(msg: &str) {
     let global_state = use_context::<GlobalState>().expect("no global state");
-    let msg = Messages::deserialize(&msg).unwrap();
+    let msg = Messages::deserialize(msg).unwrap();
     match msg {
         Messages::MotorState(value) => global_state.motor_state.set(value),
         Messages::CommandStart(_) => (),
