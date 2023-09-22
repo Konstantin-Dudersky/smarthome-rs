@@ -1,3 +1,3 @@
-export def target_start [] {
+export def main [] {
     docker compose up -d;
 }

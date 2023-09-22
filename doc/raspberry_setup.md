@@ -9,22 +9,11 @@ sudo apt update && sudo apt upgrade
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # nushell ----------------------------------------------------------------------
-sudo apt -y install pkg-config libssl-dev
-sudo apt -y install build-essential
-cargo install nu just
+sudo apt -y install pkg-config libssl-dev build-essential
+cargo install nu
 
-# docker -----------------------------------------------------------------------
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo docker run hello-world
-# non-sudo
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
-docker run hello-world
-# autostart
-sudo systemctl enable docker.service
-sudo systemctl enable containerd.service
+# Дальше устанавливаем из скрипта
+nu scripts/target-install.nu
 
-# TODO копируем код, создаем .env файл
+# TODO создаем .env файл
 ```
