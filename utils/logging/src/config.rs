@@ -44,7 +44,10 @@ pub async fn configure_logging(
         .label("service", service)?
         .build_url(loki_url.clone())?;
 
-    let layer_stdout = tracing_subscriber::fmt::Layer::new().pretty();
+    let layer_stdout = match cfg!(debug_assertions) {
+        true => Some(tracing_subscriber::fmt::Layer::new().pretty()),
+        false => None,
+    };
 
     tracing_subscriber::registry()
         .with(layer_loki.with_filter(my_filter.clone()))

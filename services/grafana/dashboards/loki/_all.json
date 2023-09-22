@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 8,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -51,12 +50,12 @@
             "uid": "P982945308D3682D1"
           },
           "editorMode": "builder",
-          "expr": "{service=\"deconz-ws\"} |= ``",
+          "expr": "{service=~\"$service\", level=~\"$level\"} |= `$line_contain`",
           "queryType": "range",
           "refId": "A"
         }
       ],
-      "title": "opcua-client",
+      "title": "$service",
       "type": "logs"
     }
   ],
@@ -65,16 +64,115 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": ["deconz-ws", "deconz-ws1"],
+          "value": ["deconz-ws", "deconz-ws1"]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "P982945308D3682D1"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Сервис",
+        "multi": true,
+        "name": "service",
+        "options": [],
+        "query": {
+          "label": "service",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "trace|debug|info|warn|error",
+        "current": {
+          "selected": true,
+          "text": ["info", "warn", "error"],
+          "value": ["info", "warn", "error"]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Уровень",
+        "multi": true,
+        "name": "level",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "trace",
+            "value": "trace"
+          },
+          {
+            "selected": false,
+            "text": "debug",
+            "value": "debug"
+          },
+          {
+            "selected": true,
+            "text": "info",
+            "value": "info"
+          },
+          {
+            "selected": true,
+            "text": "warn",
+            "value": "warn"
+          },
+          {
+            "selected": true,
+            "text": "error",
+            "value": "error"
+          }
+        ],
+        "query": "trace, debug, info, warn, error",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "label": "Содержит",
+        "name": "line_contain",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
+      }
+    ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "_all",
   "uid": "f0eba705-09c5-4476-a5f0-6c9e2a8ab077",
-  "version": 2,
+  "version": 7,
   "weekStart": ""
 }
