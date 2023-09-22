@@ -14,7 +14,7 @@ mod config;
 async fn main() {
     let config = load_config().expect("Settings not loaded");
 
-    configure_logging("db-saver", config.loki_url.as_str(), Level::INFO)
+    configure_logging("db-saver", &config.loki_url, Level::INFO)
         .await
         .expect("Error in logger initialization");
 

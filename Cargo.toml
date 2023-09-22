@@ -6,6 +6,7 @@ members = [
     "libraries/webapp-lib",
     "libraries/websocket-lib",
     "services/api",
+    "./services/deconz-ws",
     "services/websocket",
     "services/db-saver",
     "services/webapp",

@@ -1,0 +1,12 @@
+[package]
+name = "deconz-ws"
+version = "0.0.1"
+edition = "2021"
+
+
+[dependencies]
+tokio = { workspace = true }
+tracing = { workspace = true }
+
+env_vars = { workspace = true }
+logging = { workspace = true }

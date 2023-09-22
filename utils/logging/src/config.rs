@@ -6,7 +6,7 @@ use crate::errors::Errors;
 
 pub async fn configure_logging(
     service: &str,
-    loki_url: &str,
+    loki_url: &Url,
     min_level: Level,
 ) -> Result<(), Errors> {
     let min_level_clone = min_level;
@@ -42,7 +42,7 @@ pub async fn configure_logging(
 
     let (layer_loki, task) = tracing_loki::builder()
         .label("service", service)?
-        .build_url(Url::parse(loki_url)?)?;
+        .build_url(loki_url.clone())?;
 
     let layer_stdout = tracing_subscriber::fmt::Layer::new().pretty();
 

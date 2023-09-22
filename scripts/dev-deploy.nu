@@ -1,4 +1,4 @@
-use lib/sync.nu 
+use sync.nu 
 use lib/run_in_ssh.nu
 
 run_in_ssh "target-stop"

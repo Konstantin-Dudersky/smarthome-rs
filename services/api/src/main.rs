@@ -9,7 +9,7 @@ use api::app;
 async fn main() {
     let config = env_vars::load_config().expect("Setting not loaded");
 
-    configure_logging("api", config.loki_url.as_str(), Level::INFO)
+    configure_logging("api", &config.loki_url, Level::INFO)
         .await
         .expect("Error in logger initialization");
 

@@ -12,7 +12,7 @@ use websocket_lib::{tasks, Errors};
 async fn main() {
     let config = env_vars::load_config().expect("Settings not loaded");
 
-    configure_logging("api-ws", config.loki_url.as_str(), Level::DEBUG)
+    configure_logging("api-ws", &config.loki_url, Level::DEBUG)
         .await
         .expect("Error in logger initialization");
 
