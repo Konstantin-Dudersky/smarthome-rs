@@ -1,1 +1,4 @@
-cargo build --target=aarch64-unknown-linux-gnu --release
+
+export def main [] {
+    cargo build --target=aarch64-unknown-linux-gnu --release
+}

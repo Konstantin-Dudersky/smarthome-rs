@@ -5,6 +5,7 @@ networks:
   smarthome_net:
 
 services:
+  # https://github.com/deconz-community/deconz-docker
   deconz_hub:
     container_name: deconz_hub
     devices:
