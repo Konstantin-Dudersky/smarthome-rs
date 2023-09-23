@@ -30,7 +30,7 @@ async fn main() {
             Err(error) => match error {
                 Errors::BindToPortError(error) => {
                     error!("Stop program: {:?}", error);
-                    return;
+                    break;
                 }
                 _ => {
                     warn!("{:?}", error);
@@ -41,4 +41,6 @@ async fn main() {
         sleep(Duration::from_secs(2)).await;
         info!("Restarting...");
     }
+
+    sleep(Duration::from_secs(2)).await;
 }

@@ -34,7 +34,7 @@
       },
       "id": 1,
       "options": {
-        "dedupStrategy": "none",
+        "dedupStrategy": "exact",
         "enableLogDetails": true,
         "prettifyLogMessage": false,
         "showCommonLabels": false,
@@ -50,16 +50,17 @@
             "uid": "P982945308D3682D1"
           },
           "editorMode": "builder",
-          "expr": "{service=~\"$service\", level=~\"$level\"} |= `$line_contain`",
+          "expr": "{service=~\"$service\", level=~\"$level\"} |= `$line_contain` | json | line_format `{{.message}}`",
           "queryType": "range",
           "refId": "A"
         }
       ],
       "title": "$service",
+      "transformations": [],
       "type": "logs"
     }
   ],
-  "refresh": "5s",
+  "refresh": "auto",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -68,8 +69,8 @@
       {
         "current": {
           "selected": true,
-          "text": ["deconz-ws", "deconz-ws1"],
-          "value": ["deconz-ws", "deconz-ws1"]
+          "text": ["All"],
+          "value": ["$__all"]
         },
         "datasource": {
           "type": "loki",
@@ -98,8 +99,8 @@
         "allValue": "trace|debug|info|warn|error",
         "current": {
           "selected": true,
-          "text": ["info", "warn", "error"],
-          "value": ["info", "warn", "error"]
+          "text": ["warn", "error", "info"],
+          "value": ["warn", "error", "info"]
         },
         "hide": 0,
         "includeAll": true,
@@ -145,7 +146,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "",
           "value": ""
         },
@@ -166,13 +167,13 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "_all",
   "uid": "f0eba705-09c5-4476-a5f0-6c9e2a8ab077",
-  "version": 7,
+  "version": 1,
   "weekStart": ""
 }

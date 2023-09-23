@@ -3,12 +3,17 @@ use std::fmt;
 use serde::{Deserialize, Serialize};
 use serde_json::{from_str as deserialize, to_string as serialize};
 
+use redis_client_lib::GetKey;
+
 use crate::types;
 use crate::Errors;
 
 /// Все сообщения в системе
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq)]
 pub enum Messages {
+    OpenCloseSensor(types::SingleValue<bool>),
+
+    // удалить
     MotorState(types::SingleValue<i16>),
     CommandStart(types::Command),
     CommandStop(types::Command),
@@ -17,9 +22,9 @@ pub enum Messages {
     Temperature(types::SingleValue<f64>),
 }
 
-impl Messages {
-    /// Ключ для сохранения в базе данных
-    pub fn key(&self) -> String {
+/// Ключ для сохранения в базе данных
+impl GetKey for Messages {
+    fn key(&self) -> String {
         let full_str = self.to_string();
         let parenth_index = full_str.find('(');
         let full_str: String = match parenth_index {
@@ -28,7 +33,9 @@ impl Messages {
         };
         full_str
     }
+}
 
+impl Messages {
     pub fn deserialize(message: &str) -> Result<Self, Errors> {
         match deserialize::<Self>(message) {
             Ok(value) => Ok(value),

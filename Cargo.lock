@@ -671,10 +671,19 @@ dependencies = [
 name = "deconz-ws"
 version = "0.0.1"
 dependencies = [
+ "chrono",
  "env_vars",
+ "futures-util",
  "logging",
+ "messages",
+ "redis-client-lib",
+ "serde",
+ "serde_json",
  "tokio",
+ "tokio-tungstenite",
+ "tokio-util",
  "tracing",
+ "url",
 ]
 
 [[package]]
@@ -1813,6 +1822,7 @@ name = "messages"
 version = "0.0.1"
 dependencies = [
  "chrono",
+ "redis-client-lib",
  "serde",
  "serde_json",
 ]

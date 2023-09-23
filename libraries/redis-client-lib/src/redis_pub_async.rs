@@ -8,7 +8,7 @@ use serde::{de::DeserializeOwned, Serialize};
 use serde_json::{from_str as deserialize, to_string as serialize};
 use url::Url;
 
-use crate::errors::Errors;
+use crate::{errors::Errors, GetKey};
 
 pub struct RedisPubAsync {
     connection: Connection,

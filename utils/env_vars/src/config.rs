@@ -24,6 +24,7 @@ pub struct Config {
     pub db_password: String,
 
     pub deconz_hub_api_key: String,
+    pub deconz_hub_host: String,
     pub deconz_hub_port_api: u16,
     pub deconz_hub_port_vnc: u16,
     pub deconz_hub_port_ws: u16,
@@ -62,6 +63,7 @@ impl Default for Config {
             db_password: "postgres".to_string(),
 
             deconz_hub_api_key: "api_key".to_string(),
+            deconz_hub_host: "localhost".to_string(),
             deconz_hub_port_api: 8010,
             deconz_hub_port_vnc: 8011,
             deconz_hub_port_ws: 8012,

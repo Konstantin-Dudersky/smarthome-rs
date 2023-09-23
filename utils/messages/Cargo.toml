@@ -8,3 +8,5 @@ edition = "2021"
 chrono = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
+
+redis-client-lib = { workspace = true }
