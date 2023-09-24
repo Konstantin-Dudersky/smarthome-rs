@@ -1,3 +1,4 @@
 export def main [] {
-    docker compose down;
+    docker compose down
+    ~/.cargo/bin/pueue reset
 }
