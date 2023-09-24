@@ -39,5 +39,6 @@ pub fn process_ws_message(msg: &str) {
         Messages::SetpointRead(_) => (),
         Messages::SetpointWrite(_) => (),
         Messages::Temperature(value) => global_state.temperature.set(value),
+        Messages::OpenCloseSensor(_) => todo!(),
     };
 }

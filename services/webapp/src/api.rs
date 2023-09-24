@@ -1,6 +1,6 @@
 use gloo::{console, net::http::Request};
 
-use messages::Messages;
+use messages::{GetKey, Messages};
 
 // http://localhost:3001/value/
 

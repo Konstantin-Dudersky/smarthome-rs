@@ -22,7 +22,7 @@ pub async fn put(
     extract::Json(payload): extract::Json<messages::Messages>,
 ) -> String {
     let mut redis_hash = state.redis_hash.lock().await;
-    redis_hash.set(&id, &payload).await.unwrap();
+    redis_hash.set(payload).await.unwrap();
     let msg: messages::Messages = redis_hash.get(&id).await.unwrap();
     serialize(&msg).unwrap()
 }

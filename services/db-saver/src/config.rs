@@ -1,5 +1,5 @@
 use db_saver_lib::models::Row;
-use messages::Messages;
+use messages::{GetKey, Messages};
 
 /// Преобразование сообщений из Redis в строки для базы данных
 pub fn prepare_msg_from_redis_to_db(msg: Messages) -> Option<Row> {
@@ -19,5 +19,6 @@ pub fn prepare_msg_from_redis_to_db(msg: Messages) -> Option<Row> {
         }
         // not archiving
         Messages::SetpointWrite(_) => None,
+        Messages::OpenCloseSensor(_) => todo!(),
     }
 }
