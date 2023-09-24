@@ -5,16 +5,22 @@ use std::str::FromStr;
 use tokio::main;
 use url::Url;
 
-use redis_client_lib::RedisPubAsync;
+use redis_client_lib::{GetKey, RedisPubAsync};
 
-#[derive(Debug)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 enum Tags {
-    Field1,
+    Field1(SimpleValue<u32>),
 }
 
-#[derive(Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 struct SimpleValue<T> {
     value: T,
+}
+
+impl GetKey for Tags {
+    fn key(&self) -> String {
+        format!("{}", self)
+    }
 }
 
 impl std::fmt::Display for Tags {
@@ -30,11 +36,11 @@ async fn main() {
         .await
         .expect("Соединение не создано");
 
-    let value = SimpleValue { value: 10 };
+    let value = Tags::Field1(SimpleValue { value: 10 });
 
-    hash.set(&Tags::Field1.to_string(), &value).await.unwrap();
-    let read_field: SimpleValue<i32> =
-        hash.get(&Tags::Field1.to_string()).await.unwrap();
+    hash.set(value.clone()).await.unwrap();
+    let key = value.key();
+    let read_field: Tags = hash.get(&key).await.unwrap();
 
     assert_eq!(read_field, value);
 }

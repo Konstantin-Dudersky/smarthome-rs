@@ -37,6 +37,8 @@ where
 
 #[cfg(test)]
 mod tests {
+    use crate::test::TestRedisValue;
+
     use super::super::RedisPubAsync;
     use super::*;
 
@@ -51,10 +53,11 @@ mod tests {
     #[timeout(1000)]
     async fn test1() {
         let url = Url::from_str("redis://127.0.0.1").unwrap();
-        let channel = "test_pub";
-        let msg_content = "test pub value";
+        let channel = "test_sub_sync";
+        let msg_content =
+            TestRedisValue::new("test_sub_sync", "test sub value".to_string());
 
-        let (tx, rx) = mpsc::channel::<String>();
+        let (tx, rx) = mpsc::channel::<TestRedisValue<String>>();
 
         // запускаем поток с подпиской
         let url_clone = url.clone();
@@ -64,7 +67,7 @@ mod tests {
 
         // отправляем сообщение
         let mut redis_hash = RedisPubAsync::new(&url, channel).await.unwrap();
-        redis_hash.set(channel, msg_content).await.unwrap();
+        redis_hash.set(msg_content.clone()).await.unwrap();
 
         // проверяем, что сообщение пришло
         for msg in rx {

@@ -24,9 +24,9 @@ impl RedisPubAsync {
             channel: channel.to_string(),
         })
     }
-    pub async fn set<V>(&mut self, field: &str, value: V) -> Result<(), Errors>
+    pub async fn set<V>(&mut self, value: V) -> Result<(), Errors>
     where
-        V: Serialize + std::marker::Send,
+        V: Serialize + std::marker::Send + GetKey,
     {
         let json = match serialize(&value) {
             Ok(value) => value,
@@ -34,7 +34,9 @@ impl RedisPubAsync {
                 return Err(Errors::SerializeError(error.to_string()))
             }
         };
-        self.connection.hset(&self.channel, field, &json).await?;
+        self.connection
+            .hset(&self.channel, value.key(), &json)
+            .await?;
         self.connection.publish(&self.channel, &json).await?;
         Ok(())
     }
@@ -103,6 +105,7 @@ impl RedisPubAsync {
 mod tests {
     use std::str::FromStr;
 
+    use super::super::test::TestRedisValue;
     use super::*;
     use serde::Deserialize;
 
@@ -115,16 +118,18 @@ mod tests {
     }
 
     /// Функция устанавливает, считывает, и проверяет результат
-    async fn set_and_get<V>(hash: &mut RedisPubAsync, field: &str, value: V)
+    async fn set_and_get<V>(hash: &mut RedisPubAsync, value: V)
     where
         V: Serialize
             + DeserializeOwned
             + PartialEq
             + std::fmt::Debug
-            + std::marker::Send,
+            + std::marker::Send
+            + GetKey,
     {
-        hash.set(field, value).await.unwrap();
-        let get_value: V = hash.get(field).await.unwrap();
+        let key = value.key();
+        hash.set(value).await.unwrap();
+        let get_value: V = hash.get(&key).await.unwrap();
         assert_eq!(get_value, get_value);
     }
 
@@ -139,11 +144,15 @@ mod tests {
     async fn set_get_base_types() {
         let mut hash = create_connection(None).await;
 
-        set_and_get(&mut hash, "string_field", "string value".to_string())
+        set_and_get(
+            &mut hash,
+            TestRedisValue::new("string_field", "string value".to_string()),
+        )
+        .await;
+        set_and_get(&mut hash, TestRedisValue::new("int_field", -10)).await;
+        set_and_get(&mut hash, TestRedisValue::new("float_field", -1.23456))
             .await;
-        set_and_get(&mut hash, "int_field", -10).await;
-        set_and_get(&mut hash, "float_field", -1.23456).await;
-        set_and_get(&mut hash, "bool_field", true).await;
+        set_and_get(&mut hash, TestRedisValue::new("bool_field", true)).await;
     }
 
     /// Записываем и читаем структуру
@@ -173,7 +182,7 @@ mod tests {
             },
         };
         let mut hash = create_connection(None).await;
-        set_and_get(&mut hash, "struct", item1).await;
+        set_and_get(&mut hash, TestRedisValue::new("struct", item1)).await;
     }
 
     /// Читаем из несуществующего хеша
@@ -199,7 +208,9 @@ mod tests {
     async fn get_from_notexist_field() {
         let mut hash = create_connection(None).await;
         // создаем поле, чтобы убедиться, что хеш создан
-        hash.set("field_for_hash_create", 10).await.unwrap();
+        hash.set(TestRedisValue::new("field_for_hash_create", 10))
+            .await
+            .unwrap();
         match hash.get::<i32>("no_created_field").await {
             Ok(value) => {
                 panic!("Вернулось значение, хотя не должно было: {value}")
@@ -215,12 +226,14 @@ mod tests {
     #[tokio::test]
     async fn hvals() {
         let mut hash = create_connection(Some("test_hvals_async")).await;
-        hash.set("field1", "value1").await.unwrap();
-        hash.set("field2", "value2").await.unwrap();
-        let msgs = hash.hvals::<String>().await.unwrap();
+        let value1 = TestRedisValue::new("field1", "value1".to_string());
+        let value2 = TestRedisValue::new("field2", "value2".to_string());
+        hash.set(value1.clone()).await.unwrap();
+        hash.set(value2.clone()).await.unwrap();
+        let msgs = hash.hvals::<TestRedisValue<String>>().await.unwrap();
 
-        assert!(msgs.contains(&"value1".to_string()));
-        assert!(msgs.contains(&"value2".to_string()));
+        assert!(msgs.contains(&value1));
+        assert!(msgs.contains(&value2));
         assert_eq!(msgs.len(), 2);
     }
 }

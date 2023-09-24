@@ -14,7 +14,7 @@ use tokio::{
 
 use env_vars::load_config;
 use logging::configure_logging;
-use redis_client_lib::RedisPubAsync;
+use redis_client_lib::{GetKey, RedisPubAsync};
 use tokio_tungstenite::{connect_async, MaybeTlsStream, WebSocketStream};
 use tokio_util::sync::CancellationToken;
 use tracing::{info, trace, warn, Level};
@@ -128,7 +128,7 @@ async fn task_redis_pub<WM, RM>(
 ) -> MyResult<()>
 where
     WM: Serialize + Send,
-    RM: Serialize + Send,
+    RM: Serialize + Send + GetKey,
 {
     let mut redis = RedisPubAsync::new(&redis_url, &redis_channel).await?;
     while let Some(msg) = rx.recv().await {
@@ -137,7 +137,7 @@ where
             Some(val) => val,
             None => continue,
         };
-        redis.set("test", msg).await?;
+        redis.set(msg).await?;
     }
     Ok(())
 }

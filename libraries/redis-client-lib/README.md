@@ -5,5 +5,5 @@
 Перед запуском тестов необходимо запустить redis на локальной машине
 
 ```bash
-cargo test -p redis-client
+cargo test -p redis-client-lib
 ```

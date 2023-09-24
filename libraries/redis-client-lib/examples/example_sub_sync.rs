@@ -6,16 +6,19 @@ use std::thread;
 
 use tokio::main;
 
-use redis_client_lib::{start_redis_subscription, RedisPubAsync};
+use redis_client_lib::{
+    start_redis_subscription, RedisPubAsync, TestRedisValue,
+};
 use url::Url;
 
 #[main]
 async fn main() {
     let url = Url::from_str("redis://127.0.0.1").expect("");
     let channel = "test_sub";
-    let msg_content = "test sub value";
+    let msg_content =
+        TestRedisValue::new("test_sub", "test sub value".to_string());
 
-    let (tx, rx) = mpsc::channel::<String>();
+    let (tx, rx) = mpsc::channel::<TestRedisValue<String>>();
 
     // запускаем поток с подпиской
     let url_clone = url.clone();
@@ -25,7 +28,7 @@ async fn main() {
 
     // отправляем сообщение
     let mut redis_hash = RedisPubAsync::new(&url, channel).await.unwrap();
-    redis_hash.set(channel, msg_content).await.unwrap();
+    redis_hash.set(msg_content.clone()).await.unwrap();
 
     // проверяем, что сообщение пришло
     for msg in rx {

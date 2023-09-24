@@ -49,6 +49,8 @@ where
 mod tests {
     use std::str::FromStr;
 
+    use crate::test::TestRedisValue;
+
     use super::super::RedisPubAsync;
     use super::*;
 
@@ -62,9 +64,12 @@ mod tests {
     async fn test1() {
         let url = Url::from_str("redis://127.0.0.1").expect("");
         let channel = "redis_sub_async";
-        let msg_content = "test pub value";
+        let msg_content = TestRedisValue::new(
+            "redis_sub_async",
+            "test pub value".to_string(),
+        );
 
-        let (tx, mut rx) = mpsc::channel::<String>(32);
+        let (tx, mut rx) = mpsc::channel::<TestRedisValue<String>>(32);
 
         // запускаем задачу с подпиской
         let url_clone = url.clone();
@@ -78,10 +83,11 @@ mod tests {
             // отправляем сообщение
             let mut redis_hash =
                 RedisPubAsync::new(&url, channel).await.expect("");
-            redis_hash.set(channel, msg_content).await.expect("");
+            redis_hash.set(msg_content.clone()).await.expect("");
 
             // проверяем, что сообщение пришло
             while let Some(msg) = rx.recv().await {
+                let msg = msg;
                 assert_eq!(msg_content, msg);
                 break;
             }
