@@ -13,7 +13,7 @@ layout {
         pane {
             name "root"
             command "ssh"
-            args "pi@192.168.101.10"
+            args "-t" "pi@192.168.101.10" "~/.cargo/bin/nu -i"
         }
     }
 
@@ -30,9 +30,12 @@ layout {
         pane {
             name "pueue"
             command "ssh"
-            args "-t" "pi@target" "loop { clear; ~/.cargo/bin/pueue status; sleep 2sec}"
+            args "-t" "pi@target" "~/.cargo/bin/nu -c 'loop {clear; ~/.cargo/bin/pueue status; sleep 2sec}'"
             start_suspended false
         }
     }
 }
 
+// ssh -t pi@target '~/.cargo/bin/nu -c loop { ~/.cargo/bin/pueue status; sleep 2sec}'
+
+// ". ~/.profile" "~/.cargo/bin/nu -i"

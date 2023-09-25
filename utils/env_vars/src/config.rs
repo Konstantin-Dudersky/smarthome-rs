@@ -39,6 +39,7 @@ pub struct Config {
 
     pub redis_channel: String,
     pub redis_port: u16,
+    pub redis_port_ui: u16,
     pub redis_url: Url,
 
     pub webapp_port: u16,
@@ -75,6 +76,7 @@ impl Default for Config {
 
             redis_channel: Default::default(),
             redis_port: 6379,
+            redis_port_ui: 8013,
             redis_url: Url::from_str("redis://localhost:6379").unwrap(),
 
             webapp_port: 8090,

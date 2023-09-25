@@ -30,7 +30,7 @@ services:
     image: redis/redis-stack:latest
     ports:
       - "${REDIS_PORT}:6379"
-      - "8010:8001"
+      - "${REDIS_PORT_UI}:8001"
 
   loki:
     container_name: loki
