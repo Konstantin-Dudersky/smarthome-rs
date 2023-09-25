@@ -25,5 +25,14 @@ layout {
             start_suspended false
         }
     }
+
+    tab name="pueue" cwd="." {
+        pane {
+            name "pueue"
+            command "ssh"
+            args "-t" "pi@target" "loop { clear; ~/.cargo/bin/pueue status; sleep 2sec}"
+            start_suspended false
+        }
+    }
 }
 

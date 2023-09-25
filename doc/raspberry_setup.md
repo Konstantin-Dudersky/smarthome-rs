@@ -12,6 +12,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 sudo apt -y install pkg-config libssl-dev build-essential
 cargo install nu
 
+# установить стартовый шелл
+sudo nano /etc/passwd
+# найти строку, где задается шелл, заменить
+# /bin/bash -> /home/pi/.cargo/bin/nu
+
 # Дальше устанавливаем из скрипта
 nu scripts/target-install.nu
 
