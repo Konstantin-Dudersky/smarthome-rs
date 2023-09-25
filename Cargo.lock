@@ -646,15 +646,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2e66c9d817f1720209181c316d28635c050fa304f9c79e47a520882661b7308"
 
 [[package]]
-name = "db-saver-lib"
-version = "0.0.1"
-dependencies = [
- "chrono",
- "sqlx",
-]
-
-[[package]]
-name = "db_saver"
+name = "db-saver"
 version = "0.0.1"
 dependencies = [
  "db-saver-lib",
@@ -665,6 +657,14 @@ dependencies = [
  "sqlx",
  "tokio",
  "tracing",
+]
+
+[[package]]
+name = "db-saver-lib"
+version = "0.0.1"
+dependencies = [
+ "chrono",
+ "sqlx",
 ]
 
 [[package]]

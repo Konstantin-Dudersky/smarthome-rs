@@ -1,5 +1,5 @@
 [package]
-name = "db_saver"
+name = "db-saver"
 version = "0.0.1"
 edition = "2021"
 
