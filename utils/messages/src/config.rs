@@ -12,14 +12,10 @@ use crate::Errors;
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq)]
 pub enum Messages {
     OpenCloseSensor(types::SingleValue<bool>),
-
-    // удалить
-    MotorState(types::SingleValue<i16>),
-    CommandStart(types::Command),
-    CommandStop(types::Command),
-    SetpointRead(types::SingleValue<f64>),
-    SetpointWrite(types::SingleValue<f64>),
-    Temperature(types::SingleValue<f64>),
+    // датчик температуры / влажности
+    RoomTemperature(types::SingleValue<f64>),
+    RoomHumidity(types::SingleValue<f64>),
+    RoomPressure(types::SingleValue<f64>),
 }
 
 /// Ключ для сохранения в базе данных
@@ -71,13 +67,15 @@ mod tests {
 
     #[test]
     fn test_key() {
-        let msg1 = Messages::MotorState(types::SingleValue::new(10, None));
+        let msg1 =
+            Messages::RoomTemperature(types::SingleValue::new(10.0, None));
         assert_eq!("MotorState", msg1.key());
     }
 
     #[test]
     fn ser_deser() {
-        let msg1 = Messages::MotorState(types::SingleValue::new(10, None));
+        let msg1 =
+            Messages::RoomTemperature(types::SingleValue::new(10.0, None));
 
         let ser = msg1.serialize().unwrap();
         let deser = Messages::deserialize(&ser).unwrap();

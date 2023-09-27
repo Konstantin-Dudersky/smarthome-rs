@@ -16,13 +16,13 @@ fn App() -> impl IntoView {
     let gs = use_context::<GlobalState>().expect("no global state");
 
     let command_start = move || {
-        let msg = Messages::CommandStart(types::Command::default());
-        gs.send_msg.set(Some(msg));
+        // let msg = Messages::CommandStart(types::Command::default());
+        // gs.send_msg.set(Some(msg));
     };
 
     let command_stop = move || {
-        let msg = Messages::CommandStop(types::Command::default());
-        gs.send_msg.set(Some(msg));
+        // let msg = Messages::CommandStop(types::Command::default());
+        // gs.send_msg.set(Some(msg));
     };
 
     let motor_state =
@@ -64,7 +64,7 @@ fn App() -> impl IntoView {
                 </div>
                 <div class="basis-1/2">
                     <p class="m-4">
-                        { Signal::derive(move|| gs.temperature.get().value) }
+                        { Signal::derive(move|| gs.room_temperature.get().value) }
                     </p>
                 </div>
             </div>
