@@ -30,12 +30,11 @@ layout {
         pane {
             name "pueue"
             command "ssh"
-            args "-t" "pi@target" "~/.cargo/bin/nu -c 'loop {clear; ~/.cargo/bin/pueue status; sleep 2sec}'"
+            args "-t" "pi@target" "~/.cargo/bin/nu -c 'loop {clear; sudo pueue status; sleep 2sec}'"
             start_suspended false
         }
     }
 }
 
 // ssh -t pi@target '~/.cargo/bin/nu -c loop { ~/.cargo/bin/pueue status; sleep 2sec}'
-
-// ". ~/.profile" "~/.cargo/bin/nu -i"
+// args "-t" "pi@target" "~/.cargo/bin/nu -c 'loop {clear; ~/.cargo/bin/pueue status; sleep 2sec}'"

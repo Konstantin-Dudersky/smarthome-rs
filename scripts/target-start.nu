@@ -7,7 +7,11 @@ export def main [] {
     sleep 5sec
 
     ui "Start services"
-    ~/.cargo/bin/pueue add ./target/db-saver
-    ~/.cargo/bin/pueue add ./target/deconz-ws
-    ~/.cargo/bin/pueue parallel 2
+    sudo pueue add ./target/db-saver
+    sudo pueue add ./target/deconz-ws
+    sudo pueue parallel 2
+
+    # ~/.cargo/bin/pueue add ./target/db-saver
+    # ~/.cargo/bin/pueue add ./target/deconz-ws
+    # ~/.cargo/bin/pueue parallel 2
 }

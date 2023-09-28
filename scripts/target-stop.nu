@@ -5,5 +5,5 @@ export def main [] {
     docker compose down
 
     ui "Stop services"
-    ~/.cargo/bin/pueue reset -f
+    sudo pueue reset -f
 }
