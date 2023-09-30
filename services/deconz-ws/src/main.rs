@@ -21,8 +21,9 @@ use tracing::{info, trace, warn, Level};
 
 use deconz_ws::{
     async_task_utils::{cancellable_task, flatten_task_result},
-    messages_from_ws::Message,
-    process_message, Errors, MyResult,
+    messages_from_ws::WsMessage,
+    process_api_message, process_ws_message, read_state_from_api, Errors,
+    MyResult,
 };
 use url::Url;
 
@@ -61,6 +62,11 @@ async fn task_main(
     redis_url: Url,
     redis_channel: String,
 ) -> MyResult<()> {
+    task_redis_pub1(redis_url.clone(), redis_channel.clone())
+        .await
+        .unwrap();
+
+    // подключаемся к Websocket
     let addr = format!("ws://{deconz_hub_host}:{deconz_hub_port_ws}");
     let (ws_stream, _) = match connect_async(addr).await {
         Ok(val) => val,
@@ -68,14 +74,15 @@ async fn task_main(
     };
     let (_, read) = ws_stream.split();
 
-    let (tx, rx) = mpsc::channel::<Message>(128);
+    let (tx, rx) = mpsc::channel::<WsMessage>(128);
 
     // запускаем поток чтения сообщений из WS
     let future = task_ws_read(read, tx);
     let task_ws_read_handle = spawn(cancellable_task(future, cancel.clone()));
 
     // запускаем поток отправки сообщений в Redis
-    let future = task_redis_pub(rx, redis_url, redis_channel, process_message);
+    let future =
+        task_redis_pub2(rx, redis_url, redis_channel, process_ws_message);
     let task_redis_pub_handle = spawn(cancellable_task(future, cancel.clone()));
 
     match try_join!(
@@ -120,7 +127,24 @@ where
     Ok(())
 }
 
-async fn task_redis_pub<WM, RM>(
+async fn task_redis_pub1(
+    redis_url: Url,
+    redis_channel: String,
+) -> MyResult<()> {
+    let sensors = read_state_from_api().await.unwrap();
+    let mut redis = RedisPubAsync::new(&redis_url, &redis_channel).await?;
+    for sensor in sensors {
+        let msg = process_api_message(sensor);
+        let msg = match msg {
+            Some(val) => val,
+            None => continue,
+        };
+        redis.set(msg).await?;
+    }
+    Ok(())
+}
+
+async fn task_redis_pub2<WM, RM>(
     mut rx: Receiver<WM>,
     redis_url: Url,
     redis_channel: String,

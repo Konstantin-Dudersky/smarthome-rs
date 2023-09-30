@@ -1,8 +1,11 @@
+use std::collections::HashMap;
+
 use chrono::{DateTime, FixedOffset};
 use serde::{de::Error, Deserialize, Deserializer, Serialize};
 
+/// Сообщение, рассылаемое по WebSocket
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Message {
+pub struct WsMessage {
     pub e: String,
     pub id: String,
     pub r: String,
@@ -11,26 +14,55 @@ pub struct Message {
     pub uniqueid: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+/// Структура датчика, при запросе состояния по API
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Sensor {
+    pub ep: Option<u16>,
+    pub etag: String,
+    pub manufacturername: String,
+    pub modelid: String,
+    pub name: String,
+    pub state: State,
+    pub swversion: String,
+    #[serde(rename = "type")]
+    pub type_: String,
+    pub uniqueid: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(untagged)]
 pub enum State {
+    Daylight(Daylight),
     ZHAHumidity(ZHAHumidity),
     ZHALightLevel(ZHALightLevel),
-    ZHAOpenCloseState(ZHAOpenCloseState),
+    ZHAOpenClose(ZHAOpenClose),
     ZHAPresence(ZHAPresence),
     ZHAPressure(ZHAPressure),
     ZHASwitch(ZHASwitch),
     ZHATemperature(ZHATemperature),
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Daylight {
+    #[serde(deserialize_with = "parse_lastupdated")]
+    pub lastupdated: DateTime<FixedOffset>,
+    pub dark: bool,
+    pub daylight: bool,
+    pub status: u16,
+    #[serde(deserialize_with = "parse_lastupdated")]
+    pub sunrise: DateTime<FixedOffset>,
+    #[serde(deserialize_with = "parse_lastupdated")]
+    pub sunset: DateTime<FixedOffset>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ZHAHumidity {
     #[serde(deserialize_with = "parse_lastupdated")]
     pub lastupdated: DateTime<FixedOffset>,
     pub humidity: u16,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ZHALightLevel {
     #[serde(deserialize_with = "parse_lastupdated")]
     pub lastupdated: DateTime<FixedOffset>,
@@ -40,35 +72,35 @@ pub struct ZHALightLevel {
     pub lux: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct ZHAOpenCloseState {
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct ZHAOpenClose {
     #[serde(deserialize_with = "parse_lastupdated")]
     pub lastupdated: DateTime<FixedOffset>,
     pub open: bool,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ZHAPresence {
     #[serde(deserialize_with = "parse_lastupdated")]
     pub lastupdated: DateTime<FixedOffset>,
     pub presence: bool,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ZHAPressure {
     #[serde(deserialize_with = "parse_lastupdated")]
     pub lastupdated: DateTime<FixedOffset>,
     pub pressure: u16,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ZHASwitch {
     #[serde(deserialize_with = "parse_lastupdated")]
     pub lastupdated: DateTime<FixedOffset>,
     pub buttonevent: u16,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ZHATemperature {
     #[serde(deserialize_with = "parse_lastupdated")]
     pub lastupdated: DateTime<FixedOffset>,
@@ -193,7 +225,7 @@ mod tests {
         ];
 
         json.iter().for_each(|msg| {
-            deserialize::<Message>(&msg).expect("Тест не прошел");
+            deserialize::<WsMessage>(&msg).expect("Тест не прошел");
         });
     }
 }

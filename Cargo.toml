@@ -1,18 +1,18 @@
 [workspace]
 members = [
-    "libraries/db-saver-lib",
+    "./libraries/db-saver-lib",
     "./libraries/env-vars-lib",
-    "libraries/redis-client-lib",
-    "libraries/webapp-lib",
-    "libraries/websocket-lib",
-    "services/api",
+    "./libraries/redis-client-lib",
+    "./libraries/webapp-lib",
+    "./libraries/websocket-lib",
+    "./services/api",
     "./services/deconz-ws",
-    "services/websocket",
-    "services/db-saver",
-    "services/webapp",
-    "utils/env_vars",
-    "utils/logging",
-    "utils/messages",
+    "./services/websocket",
+    "./services/db-saver",
+    "./services/webapp",
+    "./utils/env_vars",
+    "./utils/logging",
+    "./utils/messages",
 ]
 resolver = "2"
 
@@ -25,6 +25,7 @@ sqlx = { version = "0.7", features = [
     "postgres",
     "runtime-tokio",
 ] }
+reqwest = { version = "0.11", features = ["json"] }
 
 # типы данных
 chrono = { version = "0.4", features = ["serde"] }
