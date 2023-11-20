@@ -18,6 +18,8 @@ resolver = "2"
 
 
 [workspace.dependencies]
+
+# БД
 redis = { version = "0.23.2", features = ["tokio-comp"] }
 sqlx = { version = "0.7", features = [
     "chrono",
@@ -25,7 +27,6 @@ sqlx = { version = "0.7", features = [
     "postgres",
     "runtime-tokio",
 ] }
-reqwest = { version = "0.11", features = ["json"] }
 
 # типы данных
 chrono = { version = "0.4", features = ["serde"] }
@@ -44,7 +45,8 @@ tokio-util = { version = "0.7" }
 
 # api
 axum = { version = "0.6" }
-axum-test = { version = "12.2" }
+axum-test = { version = "13.4" }
+reqwest = { version = "0.11", features = ["json"] }
 tower-http = { version = "0.4", features = ["cors"] }
 tokio-tungstenite = { version = "0.20" }
 
@@ -75,6 +77,11 @@ websocket-lib = { path = "./libraries/websocket-lib" }
 env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
 messages = { path = "./utils/messages" }
+
+rsiot-component-core = { version = "0.0.3" }
+rsiot-extra-components = { version = "0.0.3" }
+rsiot-messages-core = { version = "0.0.3" }
+rsiot-websocket-client = { version = "0.0.3" }
 
 # dev-dependencies
 ntest = { version = "0.9" }

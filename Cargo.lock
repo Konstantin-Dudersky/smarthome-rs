@@ -265,23 +265,26 @@ dependencies = [
 
 [[package]]
 name = "axum-test"
-version = "12.5.0"
+version = "13.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4d2978d45956c95e1c4ae0aea146a926360ba8faf78b4ab3cbf30451eb0879d9"
+checksum = "deffdcc6ae7bc024b82f4bd3f46b048781a504588e86716a6d5ccc10b2615e99"
 dependencies = [
  "anyhow",
+ "async-trait",
  "auto-future",
  "axum",
  "bytes",
  "cookie",
  "http",
  "hyper",
+ "pretty_assertions",
  "reserve-port",
  "serde",
  "serde_json",
  "serde_urlencoded",
  "smallvec",
  "tokio",
+ "tower",
  "url",
 ]
 
@@ -560,9 +563,9 @@ dependencies = [
 
 [[package]]
 name = "cookie"
-version = "0.17.0"
+version = "0.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7efb37c3e1ccb1ff97164ad95ac1606e8ccd35b3fa0a7d99a304c7f4a428cc24"
+checksum = "3cd91cf61412820176e137621345ee43b3f4423e589e7ae4e50d601d93e35ef8"
 dependencies = [
  "time",
  "version_check",
@@ -667,21 +670,18 @@ dependencies = [
 
 [[package]]
 name = "deconz-ws"
-version = "0.0.1"
+version = "0.0.0"
 dependencies = [
  "chrono",
- "env_vars",
- "futures-util",
- "logging",
- "messages",
- "redis-client-lib",
- "reqwest",
+ "rsiot-component-core",
+ "rsiot-extra-components",
+ "rsiot-messages-core",
+ "rsiot-websocket-client",
  "serde",
  "serde_json",
  "tokio",
- "tokio-tungstenite",
- "tokio-util",
  "tracing",
+ "tracing-subscriber",
  "url",
 ]
 
@@ -712,6 +712,12 @@ dependencies = [
  "quote",
  "syn 2.0.37",
 ]
+
+[[package]]
+name = "diff"
+version = "0.1.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "56254986775e3233ffa9c4d7d3faaf6d36a2c09d30b20687e9f88bc8bafc16c8"
 
 [[package]]
 name = "digest"
@@ -2250,6 +2256,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5b40af805b3121feab8a3c29f04d8ad262fa8e0561883e7653e024ae4479e6de"
 
 [[package]]
+name = "pretty_assertions"
+version = "1.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "af7cee1a6c8a5b9208b3cb1061f10c0cb689087b3d8ce85fb9d2dd7a29b6ba66"
+dependencies = [
+ "diff",
+ "yansi 0.5.1",
+]
+
+[[package]]
 name = "prettyplease"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2323,7 +2339,7 @@ dependencies = [
  "quote",
  "syn 2.0.37",
  "version_check",
- "yansi",
+ "yansi 1.0.0-rc.1",
 ]
 
 [[package]]
@@ -2532,9 +2548,9 @@ dependencies = [
 
 [[package]]
 name = "reserve-port"
-version = "1.3.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b212efd3460286cd590149feedd0afabef08ee352445dd6b4452f0d136098a5f"
+checksum = "3969e7fe15c6c1532ba1a761628298e870bbd18c252fd41a58445f6091c372a0"
 dependencies = [
  "lazy_static",
  "thiserror",
@@ -2571,6 +2587,55 @@ dependencies = [
  "spki",
  "subtle",
  "zeroize",
+]
+
+[[package]]
+name = "rsiot-component-core"
+version = "0.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bee6614407a68d968436254a2156c8cf6ce4e55f7750ac29d04977833fa69cf7"
+dependencies = [
+ "futures",
+ "rsiot-messages-core",
+ "tokio",
+]
+
+[[package]]
+name = "rsiot-extra-components"
+version = "0.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7ca2d18540e9c4dfa97a1d339f6b373b0ce4b7cc1fb390f835f6b516e9e24078"
+dependencies = [
+ "rsiot-component-core",
+ "rsiot-messages-core",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "rsiot-messages-core"
+version = "0.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "daac320072400e1a8fa4ca059a222aeb5568a1c0eb33a76be22631b1f74e5e63"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "rsiot-websocket-client"
+version = "0.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4e846c5ef26b53c4366be901ac06e64237d40d738f4f522aa8053a0510c0970c"
+dependencies = [
+ "futures-util",
+ "rsiot-component-core",
+ "rsiot-extra-components",
+ "rsiot-messages-core",
+ "tokio",
+ "tokio-tungstenite",
+ "tracing",
+ "url",
 ]
 
 [[package]]
@@ -4039,6 +4104,12 @@ checksum = "56c1936c4cc7a1c9ab21a1ebb602eb942ba868cbd44a99cb7cdc5892335e1c85"
 dependencies = [
  "linked-hash-map",
 ]
+
+[[package]]
+name = "yansi"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "09041cd90cf85f7f8b2df60c646f853b7f535ce68f85244eb6731cf89fa498ec"
 
 [[package]]
 name = "yansi"

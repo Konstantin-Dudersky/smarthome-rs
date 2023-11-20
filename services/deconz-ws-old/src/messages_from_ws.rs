@@ -1,8 +1,10 @@
+use std::collections::HashMap;
+
 use chrono::{DateTime, FixedOffset};
 use serde::{de::Error, Deserialize, Deserializer, Serialize};
 
 /// Сообщение, рассылаемое по WebSocket
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct WsMessage {
     pub e: String,
     pub id: String,
