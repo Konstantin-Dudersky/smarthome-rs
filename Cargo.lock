@@ -629,7 +629,6 @@ checksum = "c2e66c9d817f1720209181c316d28635c050fa304f9c79e47a520882661b7308"
 name = "db-saver"
 version = "0.0.1"
 dependencies = [
- "db-saver-lib",
  "env_vars",
  "logging",
  "messages",
@@ -2500,9 +2499,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot"
-version = "0.0.4"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5c49037ba0a503c65294004dc36541b1e88249a84af32bcbe7c8205ded795bda"
+checksum = "feb5aae8a9a174901c00378a25e47509878b279fb30e23a91cdbaa69259780c1"
 dependencies = [
  "document-features",
  "rsiot-component-core",
@@ -2511,13 +2510,14 @@ dependencies = [
  "rsiot-redis-publisher",
  "rsiot-redis-subscriber",
  "rsiot-websocket-client",
+ "rsiot-websocket-server",
 ]
 
 [[package]]
 name = "rsiot-component-core"
-version = "0.0.4"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f9eaa2a1df6d734c8dcf390adbf7f2ca8922d528eea4402c78e59888e1fc318f"
+checksum = "df4b055b5262cae9d3f471689538c56cd138e05e242c542275966f851bda75d4"
 dependencies = [
  "futures",
  "rsiot-messages-core",
@@ -2526,9 +2526,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-extra-components"
-version = "0.0.4"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d60524d4383989d24c9d2b543a1cfad189f70c944ec436e87dd5ffa5e6bb7bae"
+checksum = "8511aa5ce65554abefd21481276f769ed27c8666be5d4b22851d0089972e8c1f"
 dependencies = [
  "rsiot-component-core",
  "rsiot-messages-core",
@@ -2538,9 +2538,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-messages-core"
-version = "0.0.4"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8dce77793dbd7ebd2ed9c539505272b7416e63aaa23a0da1216ae9af432c736"
+checksum = "c0e4d9a49cc8ec0974cb3d053a593580aa498cc28d81fff2f49568896e2314de"
 dependencies = [
  "serde",
  "serde_json",
@@ -2548,9 +2548,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-redis-publisher"
-version = "0.0.4"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "37450f65ae348ab687cfd0680e5b14452ef4a11c31bccf558c63141aae751e03"
+checksum = "e577ea5ea4a811bd50835be5214e979c392da9ca5d7bc18bdd4a4efade6cad45"
 dependencies = [
  "redis",
  "rsiot-component-core",
@@ -2563,9 +2563,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-redis-subscriber"
-version = "0.0.4"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1a50cebf03392c81d54178dbb0d2dfa1db2b1c528b3898b230ff9c059a6626ba"
+checksum = "d5962ce542ee812956c208bc544ce864aa0e68e64bf0843fac1236112daf2a82"
 dependencies = [
  "futures-util",
  "redis",
@@ -2579,9 +2579,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-websocket-client"
-version = "0.0.4"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86e6b7de25ff7ba18c31803e5a53a48009856e3bbb9b79f122b2bc24156f2a09"
+checksum = "cd3eb605acf99b3b11562e0a5beb14b0bb9a19c3afa7de5df004ed7bb789563e"
 dependencies = [
  "futures-util",
  "rsiot-component-core",
@@ -2589,6 +2589,23 @@ dependencies = [
  "rsiot-messages-core",
  "tokio",
  "tokio-tungstenite",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "rsiot-websocket-server"
+version = "0.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8b48cbf5ba5066328ed6ba3e4e38f09f7c7b45239e6c05512356f80df626ee6f"
+dependencies = [
+ "futures-util",
+ "rsiot-component-core",
+ "rsiot-extra-components",
+ "rsiot-messages-core",
+ "tokio",
+ "tokio-tungstenite",
+ "tokio-util",
  "tracing",
  "url",
 ]

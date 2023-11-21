@@ -82,9 +82,10 @@ env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
 messages = { path = "./utils/messages" }
 
-rsiot = { version = "0.0.4", features = [
+rsiot = { version = "0.0.5", features = [
     "redis-publisher",
     "redis-subscriber",
+    "timescaledb-storing",
     "websocket-client",
 ] }
 

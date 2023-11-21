@@ -10,7 +10,6 @@ use redis_client_lib::start_redis_subscription_async;
 
 mod config;
 
-#[main]
 async fn main() {
     let config = load_config().expect("Settings not loaded");
 
