@@ -123,6 +123,7 @@ dependencies = [
  "env_vars",
  "logging",
  "messages",
+ "openssl",
  "redis-client-lib",
  "serde",
  "serde_json",
@@ -633,6 +634,7 @@ dependencies = [
  "logging",
  "messages",
  "redis-client-lib",
+ "rsiot",
  "sqlx",
  "tokio",
  "tracing",
@@ -651,13 +653,15 @@ name = "deconz-ws"
 version = "0.0.0"
 dependencies = [
  "chrono",
+ "env_vars",
+ "logging",
  "messages",
+ "openssl",
  "rsiot",
  "serde",
  "serde_json",
  "tokio",
  "tracing",
- "tracing-subscriber",
  "url",
 ]
 
@@ -2008,6 +2012,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ff011a302c396a5197692431fc1948019154afc178baf7d8e37367442a4601cf"
 
 [[package]]
+name = "openssl-src"
+version = "300.1.6+3.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "439fac53e092cd7442a3660c85dde4643ab3b5bd39040912388dcdabf6b88085"
+dependencies = [
+ "cc",
+]
+
+[[package]]
 name = "openssl-sys"
 version = "0.9.95"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2015,6 +2028,7 @@ checksum = "40a4130519a360279579c2053038317e40eff64d13fd3f004f9e1b72b8a6aaf9"
 dependencies = [
  "cc",
  "libc",
+ "openssl-src",
  "pkg-config",
  "vcpkg",
 ]

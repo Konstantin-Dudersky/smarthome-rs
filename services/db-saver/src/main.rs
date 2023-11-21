@@ -28,7 +28,7 @@ async fn main() {
     let config_clone = config.clone();
     let sp1 = spawn(async move {
         start_redis_subscription_async(
-            config_clone.redis_url,
+            config_clone.redis_url(),
             config_clone.redis_channel,
             tx,
         )

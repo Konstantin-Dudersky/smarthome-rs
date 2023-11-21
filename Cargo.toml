@@ -7,9 +7,9 @@ members = [
     "./libraries/websocket-lib",
     "./services/api",
     "./services/deconz-ws",
-    "./services/websocket",
     "./services/db-saver",
     "./services/webapp",
+    "./services/websocket",
     "./utils/env_vars",
     "./utils/logging",
     "./utils/messages",
@@ -39,7 +39,8 @@ url = { version = "2.4", features = ["serde"] }
 clap = { version = "4.4", features = ["derive"] }
 
 # для кросс-компиляции
-# openssl = { version = "0.10", features = ["vendored"] }
+# openssl = { version = "0.9.95", features = ["vendored"] }
+openssl = { version = "0.10", features = ["vendored"] }
 
 # асинхронщина
 futures-util = { version = "0.3" }

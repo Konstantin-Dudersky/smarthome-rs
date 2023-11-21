@@ -7,20 +7,24 @@ use rsiot::{
     component::ComponentChain,
 };
 use tokio::main;
-use tracing::{level_filters::LevelFilter, Level};
-use url::Url;
+use tracing::Level;
+
+use env_vars::load_config;
+use logging::configure_logging;
 
 use crate::{config_fn_recv::fn_recv, config_fn_send::fn_send};
 
 #[main]
 async fn main() {
-    tracing_subscriber::fmt()
-        .with_max_level(LevelFilter::DEBUG)
-        .init();
+    let config = load_config().expect("Файл настроек не загружен");
+
+    configure_logging("deconz-ws", &config.loki_url, Level::TRACE)
+        .await
+        .expect("Логгирование не настроено");
 
     let mut chain = ComponentChain::init(100)
         .start_cmp(cmp_websocket_client::create(cmp_websocket_client::Config {
-            url: Url::parse("ws://target:8012").unwrap(),
+            url: config.deconz_hub_ws(),
             fn_send,
             fn_recv,
         }))
@@ -28,7 +32,7 @@ async fn main() {
             level: Level::INFO,
         }))
         .end_cmp(cmp_redis_publisher::create(cmp_redis_publisher::Config {
-            url: Url::parse("redis://target:6379").unwrap(),
+            url: config.redis_url(),
             redis_channel: "smarthome".into(),
         }));
 

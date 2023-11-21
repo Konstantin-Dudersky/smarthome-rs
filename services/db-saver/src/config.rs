@@ -1,5 +1,7 @@
 use db_saver_lib::models::Row;
-use messages::{GetKey, Messages};
+use messages::Messages;
+
+use rsiot::message::IMessage;
 
 /// Преобразование сообщений из Redis в строки для базы данных
 pub fn prepare_msg_from_redis_to_db(msg: Messages) -> Option<Row> {
@@ -12,6 +14,9 @@ pub fn prepare_msg_from_redis_to_db(msg: Messages) -> Option<Row> {
         Messages::RoomTemperature(value)
         | Messages::RoomHumidity(value)
         | Messages::RoomPressure(value) => {
+            Some(Row::new(value.ts, &entity, "", value.value as f64))
+        }
+        Messages::ButtonEvent(value) => {
             Some(Row::new(value.ts, &entity, "", value.value as f64))
         }
     }

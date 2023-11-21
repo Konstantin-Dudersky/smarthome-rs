@@ -38,9 +38,9 @@ pub struct Config {
     pub portainer_port: u16,
 
     pub redis_channel: String,
+    pub redis_host: String,
     pub redis_port: u16,
     pub redis_port_ui: u16,
-    pub redis_url: Url,
 
     pub webapp_port: u16,
 }
@@ -75,11 +75,28 @@ impl Default for Config {
             portainer_port: 8001,
 
             redis_channel: Default::default(),
+            redis_host: "target".to_string(),
             redis_port: 6379,
             redis_port_ui: 8013,
-            redis_url: Url::from_str("redis://localhost:6379").unwrap(),
 
             webapp_port: 8090,
         }
+    }
+}
+
+impl Config {
+    /// URL websocket - сервера
+    pub fn deconz_hub_ws(&self) -> Url {
+        let url = format!(
+            "ws://{}:{}",
+            self.deconz_hub_host, self.deconz_hub_port_ws
+        );
+        Url::parse(&url).expect("Неправильно заданный адрес deconz ws сервера")
+    }
+
+    /// URL redis
+    pub fn redis_url(&self) -> Url {
+        let url = format!("redis://{}:{}", self.redis_host, self.redis_port);
+        Url::parse(&url).expect("Неправильно заданный адрес redis сервера")
     }
 }

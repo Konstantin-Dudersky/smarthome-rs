@@ -15,10 +15,12 @@ pub fn fn_recv(data: String) -> Vec<Messages> {
             // Кнопка
             "00:15:8d:00:02:5f:1e:77-01-0006" => {
                 match ws_msg.state {
-                    State::ZHASwitch(val) => {
+                    State::ZHASwitch(state) => {
+                        let value = state.buttonevent;
+                        let ts = state.lastupdated;
                         let msg = Messages::ButtonEvent(SingleValue::new(
-                            val.buttonevent,
-                            None,
+                            value,
+                            Some(ts),
                         ));
                         return vec![msg];
                     }
@@ -27,18 +29,43 @@ pub fn fn_recv(data: String) -> Vec<Messages> {
             }
             // Датчик температуры в комнате
             "00:15:8d:00:03:f0:44:0d-01-0402" => match ws_msg.state {
-                State::ZHATemperature(val) => {
-                    let val = val.temperature as f64 / 100.0;
-                    let msg =
-                        Messages::RoomTemperature(SingleValue::new(val, None));
+                State::ZHATemperature(state) => {
+                    let temperature = state.temperature as f64 / 100.0;
+                    let ts = state.lastupdated;
+                    let msg = Messages::RoomTemperature(SingleValue::new(
+                        temperature,
+                        Some(ts),
+                    ));
                     return vec![msg];
                 }
                 _ => (),
             },
             // Датчик влажности в комнате
-            "00:15:8d:00:03:f0:44:0d-01-0405" => {}
+            "00:15:8d:00:03:f0:44:0d-01-0405" => match ws_msg.state {
+                State::ZHAHumidity(state) => {
+                    let humidity = state.humidity as f64 / 100.0;
+                    let ts = state.lastupdated;
+                    let msg = Messages::RoomHumidity(SingleValue::new(
+                        humidity,
+                        Some(ts),
+                    ));
+                    return vec![msg];
+                }
+                _ => (),
+            },
             // Датчик давления в комнате
-            "00:15:8d:00:03:f0:44:0d-01-0403" => {}
+            "00:15:8d:00:03:f0:44:0d-01-0403" => match ws_msg.state {
+                State::ZHAPressure(state) => {
+                    let pressure = state.pressure as f64;
+                    let ts = state.lastupdated;
+                    let msg = Messages::RoomPressure(SingleValue::new(
+                        pressure,
+                        Some(ts),
+                    ));
+                    return vec![msg];
+                }
+                _ => (),
+            },
             _ => (),
         }
 
