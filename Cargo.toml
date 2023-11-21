@@ -16,6 +16,9 @@ members = [
 ]
 resolver = "2"
 
+[workspace.package]
+edition = "2021"
+license = "MIT"
 
 [workspace.dependencies]
 
@@ -36,7 +39,7 @@ url = { version = "2.4", features = ["serde"] }
 clap = { version = "4.4", features = ["derive"] }
 
 # для кросс-компиляции
-openssl = { version = "0.10", features = ["vendored"] }
+# openssl = { version = "0.10", features = ["vendored"] }
 
 # асинхронщина
 futures-util = { version = "0.3" }
@@ -52,8 +55,8 @@ tokio-tungstenite = { version = "0.20" }
 
 # wasm
 gloo = { version = "0.10", features = ["console", "net", "utils"] }
-leptos = { version = "0.5.0-rc3", features = ["csr", "tracing"] }
-leptos_router = { version = "0.5.0-rc3", features = ["csr"] }
+leptos = { version = "0.5.2", features = ["csr", "tracing"] }
+leptos_router = { version = "0.5.2", features = ["csr"] }
 web-sys = { version = "0.3", features = ["Location", "Window"] }
 
 # логгирование
@@ -78,10 +81,11 @@ env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
 messages = { path = "./utils/messages" }
 
-rsiot-component-core = { version = "0.0.3" }
-rsiot-extra-components = { version = "0.0.3" }
-rsiot-messages-core = { version = "0.0.3" }
-rsiot-websocket-client = { version = "0.0.3" }
+rsiot = { version = "0.0.4", features = [
+    "redis-publisher",
+    "redis-subscriber",
+    "websocket-client",
+] }
 
 # dev-dependencies
 ntest = { version = "0.9" }

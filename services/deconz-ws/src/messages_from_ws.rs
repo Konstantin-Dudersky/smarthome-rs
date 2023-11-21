@@ -1,3 +1,5 @@
+//! Структуры данных сообщений от Deconz
+
 use chrono::{DateTime, FixedOffset};
 use serde::{de::Error, Deserialize, Deserializer, Serialize};
 
