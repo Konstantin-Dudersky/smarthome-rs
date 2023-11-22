@@ -1,15 +1,13 @@
-use sqlx::postgres::PgPoolOptions;
-use tokio::{main, spawn, sync::mpsc};
+use tokio::main;
 use tracing::Level;
 
-use db_saver_lib::save_row_in_db;
 use env_vars::load_config;
 use logging::configure_logging;
-use messages::Messages;
-use redis_client_lib::start_redis_subscription_async;
+use rsiot::{cmp_redis_subscriber, cmp_timescaledb_storing, component::ComponentChain};
 
 mod config;
 
+#[main]
 async fn main() {
     let config = load_config().expect("Settings not loaded");
 
@@ -17,38 +15,17 @@ async fn main() {
         .await
         .expect("Error in logger initialization");
 
-    let db_url = format!(
-        "postgres://{}:{}@{}:{}/db_data",
-        config.db_user, config.db_password, config.db_host, config.db_port
-    );
+    let mut chain = ComponentChain::init(100)
+        .start_cmp(cmp_redis_subscriber::create(cmp_redis_subscriber::Config {
+            url: config.redis_url(),
+            redis_channel: config.redis_channel.clone(),
+        }))
+        .end_cmp(cmp_timescaledb_storing::new(
+            cmp_timescaledb_storing::Config {
+                fn_process: config::prepare_msg_from_redis_to_db,
+                connection_string: config.db_data_url(),
+            },
+        ));
 
-    let (tx, mut rx) = mpsc::channel::<Messages>(32);
-
-    let config_clone = config.clone();
-    let sp1 = spawn(async move {
-        start_redis_subscription_async(
-            config_clone.redis_url(),
-            config_clone.redis_channel,
-            tx,
-        )
-        .await
-        .unwrap();
-    });
-
-    let sp2 = spawn(async move {
-        let pool = PgPoolOptions::new()
-            .max_connections(5)
-            .connect(&db_url)
-            .await
-            .unwrap();
-        while let Some(msg) = rx.recv().await {
-            let row = config::prepare_msg_from_redis_to_db(msg);
-            if let Some(row) = row {
-                save_row_in_db(&row, &pool).await.unwrap();
-            };
-        }
-    });
-
-    sp1.await.unwrap();
-    sp2.await.unwrap();
+    chain.spawn().await;
 }

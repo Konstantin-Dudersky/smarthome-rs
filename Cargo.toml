@@ -1,14 +1,12 @@
 [workspace]
 members = [
-    "./libraries/db-saver-lib",
     "./libraries/env-vars-lib",
     "./libraries/redis-client-lib",
     "./libraries/webapp-lib",
-    "./libraries/websocket-lib",
-    "./services/api",
+    # "./services/api",
     "./services/deconz-ws",
     "./services/db-saver",
-    "./services/webapp",
+    # "./services/webapp",
     "./services/websocket",
     "./utils/env_vars",
     "./utils/logging",
@@ -73,20 +71,19 @@ serde_json = { version = "1" }
 toml = { version = "0.8" }
 
 # мои пакеты
-db-saver-lib = { path = "./libraries/db-saver-lib" }
 env-vars-lib = { path = "./libraries/env-vars-lib" }
 redis-client-lib = { path = "./libraries/redis-client-lib" }
 webapp-lib = { path = "./libraries/webapp-lib" }
-websocket-lib = { path = "./libraries/websocket-lib" }
 env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
 messages = { path = "./utils/messages" }
 
-rsiot = { version = "0.0.5", features = [
+rsiot = { version = "0.0.6", features = [
     "redis-publisher",
     "redis-subscriber",
     "timescaledb-storing",
     "websocket-client",
+    "websocket-server",
 ] }
 
 # dev-dependencies

@@ -2,10 +2,7 @@ mod config_fn_recv;
 mod config_fn_send;
 mod messages_from_ws;
 
-use rsiot::{
-    cmp_logger, cmp_redis_publisher, cmp_websocket_client,
-    component::ComponentChain,
-};
+use rsiot::{cmp_logger, cmp_redis_publisher, cmp_websocket_client, component::ComponentChain};
 use tokio::main;
 use tracing::Level;
 
@@ -23,7 +20,7 @@ async fn main() {
         .expect("Логгирование не настроено");
 
     let mut chain = ComponentChain::init(100)
-        .start_cmp(cmp_websocket_client::create(cmp_websocket_client::Config {
+        .start_cmp(cmp_websocket_client::new(cmp_websocket_client::Config {
             url: config.deconz_hub_ws(),
             fn_send,
             fn_recv,

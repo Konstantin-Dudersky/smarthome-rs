@@ -15,9 +15,6 @@ pub fn load_config() -> Result<Config, Errors> {
 pub struct Config {
     pub api_ws_port: u16,
 
-    // Для статической проверки SQL-запросов, не переименовывать
-    pub database_url: Url,
-
     pub db_host: String,
     pub db_port: u16,
     pub db_user: String,
@@ -53,11 +50,6 @@ impl Default for Config {
             loki_port: 3100,
             loki_url: Url::from_str("http://localhost:3100").unwrap(),
 
-            database_url: Url::from_str(
-                "postgres://DB_USER:DB_PASSWORD@DB_HOST:5432/db_data_test",
-            )
-            .unwrap(),
-
             db_host: "localhost".to_string(),
             db_port: 5432,
             db_user: "postgres".to_string(),
@@ -87,10 +79,7 @@ impl Default for Config {
 impl Config {
     /// URL websocket - сервера
     pub fn deconz_hub_ws(&self) -> Url {
-        let url = format!(
-            "ws://{}:{}",
-            self.deconz_hub_host, self.deconz_hub_port_ws
-        );
+        let url = format!("ws://{}:{}", self.deconz_hub_host, self.deconz_hub_port_ws);
         Url::parse(&url).expect("Неправильно заданный адрес deconz ws сервера")
     }
 
@@ -98,5 +87,14 @@ impl Config {
     pub fn redis_url(&self) -> Url {
         let url = format!("redis://{}:{}", self.redis_host, self.redis_port);
         Url::parse(&url).expect("Неправильно заданный адрес redis сервера")
+    }
+
+    /// Подключение к БД с данными
+    pub fn db_data_url(&self) -> Url {
+        let url = format!(
+            "postgres://{}:{}@{}:{}/db_data",
+            self.db_user, self.db_password, self.db_host, self.db_port
+        );
+        Url::parse(&url).expect("Неправильно заданный адрес БД")
     }
 }
