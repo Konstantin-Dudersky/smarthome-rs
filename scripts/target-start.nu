@@ -4,10 +4,11 @@ export def main [] {
     ui "Start docker"
     docker compose --profile target up -d
 
-    sleep 5sec
+    sleep 2sec
 
     ui "Start services"
     sudo pueue add ./target/db-saver
     sudo pueue add ./target/deconz-ws
-    sudo pueue parallel 2
+    sudo pueue add ./target/websocket-server
+    sudo pueue parallel 3
 }

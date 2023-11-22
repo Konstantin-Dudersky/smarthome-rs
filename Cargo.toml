@@ -1,13 +1,12 @@
 [workspace]
 members = [
     "./libraries/env-vars-lib",
-    "./libraries/redis-client-lib",
     "./libraries/webapp-lib",
     # "./services/api",
     "./services/deconz-ws",
     "./services/db-saver",
     # "./services/webapp",
-    "./services/websocket",
+    "./services/websocket-server",
     "./utils/env_vars",
     "./utils/logging",
     "./utils/messages",
@@ -21,14 +20,6 @@ license = "MIT"
 [workspace.dependencies]
 
 # БД
-redis = { version = "0.23.2", features = ["tokio-comp"] }
-sqlx = { version = "0.7", features = [
-    "chrono",
-    "macros",
-    "postgres",
-    "runtime-tokio",
-] }
-
 # типы данных
 chrono = { version = "0.4", features = ["serde"] }
 url = { version = "2.4", features = ["serde"] }
@@ -37,7 +28,6 @@ url = { version = "2.4", features = ["serde"] }
 clap = { version = "4.4", features = ["derive"] }
 
 # для кросс-компиляции
-# openssl = { version = "0.9.95", features = ["vendored"] }
 openssl = { version = "0.10", features = ["vendored"] }
 
 # асинхронщина
@@ -50,7 +40,6 @@ axum = { version = "0.6" }
 axum-test = { version = "13.4" }
 reqwest = { version = "0.11", features = ["json"] }
 tower-http = { version = "0.4", features = ["cors"] }
-tokio-tungstenite = { version = "0.20" }
 
 # wasm
 gloo = { version = "0.10", features = ["console", "net", "utils"] }
@@ -72,7 +61,6 @@ toml = { version = "0.8" }
 
 # мои пакеты
 env-vars-lib = { path = "./libraries/env-vars-lib" }
-redis-client-lib = { path = "./libraries/redis-client-lib" }
 webapp-lib = { path = "./libraries/webapp-lib" }
 env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
@@ -85,6 +73,3 @@ rsiot = { version = "0.0.6", features = [
     "websocket-client",
     "websocket-server",
 ] }
-
-# dev-dependencies
-ntest = { version = "0.9" }
