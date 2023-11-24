@@ -15,12 +15,12 @@ async fn main() {
         .await
         .expect("Error in logger initialization");
 
-    let mut chain = ComponentChain::init(100)
-        .start_cmp(cmp_redis_subscriber::create(cmp_redis_subscriber::Config {
+    let mut chain = ComponentChain::new(100)
+        .add_cmp(cmp_redis_subscriber::create(cmp_redis_subscriber::Config {
             url: config.redis_url(),
             redis_channel: config.redis_channel.clone(),
         }))
-        .end_cmp(cmp_timescaledb_storing::new(
+        .add_cmp(cmp_timescaledb_storing::new(
             cmp_timescaledb_storing::Config {
                 fn_process: config::prepare_msg_from_redis_to_db,
                 connection_string: config.db_data_url(),

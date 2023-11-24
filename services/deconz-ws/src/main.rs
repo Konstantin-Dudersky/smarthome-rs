@@ -19,16 +19,17 @@ async fn main() {
         .await
         .expect("Логгирование не настроено");
 
-    let mut chain = ComponentChain::init(100)
-        .start_cmp(cmp_websocket_client::new(cmp_websocket_client::Config {
+    let mut chain = ComponentChain::new(100)
+        .add_cmp(cmp_websocket_client::new(cmp_websocket_client::Config {
             url: config.deconz_hub_ws(),
             fn_send,
             fn_recv,
         }))
-        .then_cmp(cmp_logger::create(cmp_logger::Config {
+        .add_cmp(cmp_logger::create(cmp_logger::Config {
             level: Level::INFO,
+            header: "".into(),
         }))
-        .end_cmp(cmp_redis_publisher::create(cmp_redis_publisher::Config {
+        .add_cmp(cmp_redis_publisher::create(cmp_redis_publisher::Config {
             url: config.redis_url(),
             redis_channel: "smarthome".into(),
         }));
