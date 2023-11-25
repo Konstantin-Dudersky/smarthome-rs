@@ -1274,6 +1274,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "add0ab9360ddbd88cfeb3bd9574a1d85cfdfa14db10b3e21d3700dbc4328758f"
 
 [[package]]
+name = "http-server"
+version = "0.0.1"
+dependencies = [
+ "env_vars",
+ "logging",
+ "messages",
+ "openssl",
+ "rsiot",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
 name = "httparse"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

@@ -9,6 +9,7 @@ export def main [] {
     ui "Start services"
     sudo pueue add ./target/db-saver
     sudo pueue add ./target/deconz-ws
+    sudo pueue add ./target/http-server
     sudo pueue add ./target/websocket-server
-    sudo pueue parallel 3
+    sudo pueue parallel 4
 }

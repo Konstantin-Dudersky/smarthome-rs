@@ -27,6 +27,8 @@ pub struct Config {
     pub deconz_hub_port_ws: u16,
     pub deconz_hub_vnc_password: String,
 
+    pub http_server_port: u16,
+
     pub grafana_port: u16,
 
     pub loki_port: u16,
@@ -61,6 +63,8 @@ impl Default for Config {
             deconz_hub_port_vnc: 8011,
             deconz_hub_port_ws: 8012,
             deconz_hub_vnc_password: "vnc_password".to_string(),
+
+            http_server_port: 3001,
 
             grafana_port: 3000,
 

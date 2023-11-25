@@ -11,5 +11,7 @@ export def main [] {
 
     rsync -vhra ./target/aarch64-unknown-linux-gnu/release/db-saver pi@target:~/code/target/
 
+    rsync -vhra ./target/aarch64-unknown-linux-gnu/release/http-server pi@target:~/code/target/
+
     rsync -vhra ./target/aarch64-unknown-linux-gnu/release/websocket-server pi@target:~/code/target/
 }
