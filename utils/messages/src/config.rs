@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use rsiot::message::IMessage;
+use rsiot_messages_core::IMessage;
 
 use crate::types;
 

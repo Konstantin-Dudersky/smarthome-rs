@@ -6,7 +6,11 @@ edition.workspace = true
 [dependencies]
 tokio = { workspace = true }
 tracing = { workspace = true }
-rsiot = { workspace = true }
+rsiot = { workspace = true, features = [
+    "redis-publisher",
+    "redis-subscriber",
+    "websocket-server",
+] }
 
 env_vars = { workspace = true }
 logging = { workspace = true }

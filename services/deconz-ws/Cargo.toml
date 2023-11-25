@@ -6,7 +6,11 @@ edition = "2021"
 
 [dependencies]
 chrono = { workspace = true }
-rsiot = { workspace = true }
+rsiot = { workspace = true, features = [
+    "redis-publisher",
+    "redis-subscriber",
+    "websocket-client",
+] }
 serde = { workspace = true }
 serde_json = { workspace = true }
 tokio = { workspace = true }

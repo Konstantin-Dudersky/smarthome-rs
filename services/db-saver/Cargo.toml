@@ -4,7 +4,11 @@ version = "0.0.1"
 edition = "2021"
 
 [dependencies]
-rsiot = { workspace = true }
+rsiot = { workspace = true, features = [
+    "redis-publisher",
+    "redis-subscriber",
+    "timescaledb-storing",
+] }
 tracing = { workspace = true }
 tokio = { workspace = true }
 

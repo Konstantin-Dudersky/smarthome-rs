@@ -6,5 +6,5 @@ license.workspace = true
 
 [dependencies]
 chrono = { workspace = true }
-rsiot = { workspace = true }
 serde = { workspace = true }
+rsiot-messages-core = { workspace = true }

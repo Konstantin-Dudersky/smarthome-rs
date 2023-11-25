@@ -7,9 +7,7 @@ use webapp_lib::{
     define_window_url, handle_ws_connection,
 };
 
-use webapp::{
-    api, process_ws_message, ApplicationShell, GlobalNavigation, GlobalState,
-};
+use webapp::{process_ws_message, ApplicationShell, GlobalNavigation, GlobalState};
 
 #[component]
 fn App() -> impl IntoView {
@@ -25,12 +23,11 @@ fn App() -> impl IntoView {
         // gs.send_msg.set(Some(msg));
     };
 
-    let motor_state =
-        Signal::derive(move || match gs.motor_state.get().value {
-            0 => "Стоп".to_string(),
-            1 => "Работа".to_string(),
-            _ => "???".to_string(),
-        });
+    let motor_state = Signal::derive(move || match gs.motor_state.get().value {
+        0 => "Стоп".to_string(),
+        1 => "Работа".to_string(),
+        _ => "???".to_string(),
+    });
 
     view! {
         <div class="container mx-auto">
@@ -97,8 +94,7 @@ pub fn main() {
     provide_context(GlobalState::default());
     let global_state = use_context::<GlobalState>().expect("no global state");
 
-    let window_url =
-        define_window_url().expect("Не удалось определить URL окна");
+    let window_url = define_window_url().expect("Не удалось определить URL окна");
     global_state.window_url.set(window_url.clone());
 
     let api_url = format!("http://{}:3001/value/", window_url.host().unwrap());
@@ -107,9 +103,9 @@ pub fn main() {
     create_resource(
         move || (global_state.send_msg.get(), global_state.api_url.get()),
         |(send_msg, api_url)| async move {
-            if let Some(send_msg) = send_msg {
-                api::send_message_to_api(&api_url, send_msg).await;
-            }
+            // if let Some(send_msg) = send_msg {
+            //     api::send_message_to_api(&api_url, send_msg).await;
+            // }
         },
     );
 

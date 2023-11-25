@@ -3,7 +3,7 @@ use std::str::FromStr;
 use leptos::*;
 use url::Url;
 
-use messages::{types, Messages};
+use messages::{types, IMessage, Messages};
 
 #[derive(Copy, Clone, Debug)]
 pub struct GlobalState {
@@ -18,9 +18,7 @@ impl Default for GlobalState {
     fn default() -> Self {
         Self {
             send_msg: create_rw_signal(None),
-            window_url: create_rw_signal(
-                Url::from_str("http://localhost").unwrap(),
-            ),
+            window_url: create_rw_signal(Url::from_str("http://localhost").unwrap()),
             api_url: create_rw_signal("".to_string()),
 
             room_temperature: create_rw_signal(types::SingleValue::default()),
@@ -31,13 +29,12 @@ impl Default for GlobalState {
 
 pub fn process_ws_message(msg: &str) {
     let global_state = use_context::<GlobalState>().expect("no global state");
-    let msg = Messages::deserialize(msg).unwrap();
+    let msg = Messages::from_json(msg).unwrap();
     match msg {
-        Messages::RoomTemperature(value) => {
-            global_state.room_temperature.set(value)
-        }
+        Messages::RoomTemperature(value) => global_state.room_temperature.set(value),
         Messages::OpenCloseSensor(_) => todo!(),
         Messages::RoomHumidity(_) => todo!(),
         Messages::RoomPressure(_) => todo!(),
+        Messages::ButtonEvent(_) => todo!(),
     };
 }

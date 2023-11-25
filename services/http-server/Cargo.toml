@@ -7,7 +7,11 @@ edition = "2021"
 [dependencies]
 openssl = { workspace = true }
 tokio = { workspace = true }
-rsiot = { workspace = true }
+rsiot = { workspace = true, features = [
+    "redis-publisher",
+    "redis-subscriber",
+    "http-server",
+] }
 tracing = { workspace = true }
 
 # мои пакеты
