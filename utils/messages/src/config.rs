@@ -18,23 +18,19 @@ pub enum Messages {
 
 impl IMessage for Messages {}
 
-// test ------------------------------------------------------------------------
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test_key() {
-        let msg1 =
-            Messages::RoomTemperature(types::SingleValue::new(10.0, None));
+        let msg1 = Messages::RoomTemperature(types::SingleValue::new(10.0, None));
         assert_eq!("MotorState", msg1.key());
     }
 
     #[test]
     fn ser_deser() {
-        let msg1 =
-            Messages::RoomTemperature(types::SingleValue::new(10.0, None));
+        let msg1 = Messages::RoomTemperature(types::SingleValue::new(10.0, None));
 
         let ser = msg1.to_json().unwrap();
         let deser = Messages::from_json(&ser).unwrap();

@@ -2355,9 +2355,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c5ae4d1b1f97a3d9e527c9fb7da863e414475d4a3bf0614fc7f77ef5fbd1fc52"
+checksum = "ac67e4816aea8a74c13c3ccbd8efbfe4d7044cd81c92d5f84a0aae9e6ba17de7"
 dependencies = [
  "document-features",
  "rsiot-component-core",
@@ -2375,9 +2375,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-component-core"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "71349de1ec13728e815bb48e061921fad78ab29cf04bc76d1e7ecbeed14ca157"
+checksum = "24023b410889eb82ccf0877e89bc1777f9bf46238a81343d5cfdd5a3df4239f1"
 dependencies = [
  "futures",
  "rsiot-messages-core",
@@ -2387,18 +2387,20 @@ dependencies = [
 
 [[package]]
 name = "rsiot-components-config"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d8627e223b8b2bd25f3af8d463e75c2982350b7406f9be442b2d7213180dcf49"
+checksum = "b3ba304c6260c99526363bb3507cbc7facc9c6efcb478fb395b86ac1ba022e56"
 dependencies = [
+ "http 1.0.0",
+ "rsiot-messages-core",
  "url",
 ]
 
 [[package]]
 name = "rsiot-extra-components"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "44443a1e3e89ad53b566f11159fde9ce055a98f6821a6f52f3d138ba2f7570f1"
+checksum = "9b2c49165cecbb372b364446d3e0fb05f07d71d6b1ef348727739f4979e34a76"
 dependencies = [
  "rsiot-component-core",
  "rsiot-messages-core",
@@ -2408,13 +2410,13 @@ dependencies = [
 
 [[package]]
 name = "rsiot-http-client"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "16a3ad933d9dbc01f2b39358564ff099540579b7ff3fe8a1b1c38bfb3d64520f"
+checksum = "a38ecff429b49979df2c4ad18c541265b36c1c2dfc50b3192bc994367bb3d73f"
 dependencies = [
  "reqwest",
+ "rsiot-components-config",
  "rsiot-extra-components",
- "rsiot-http-client-config",
  "rsiot-messages-core",
  "tokio",
  "tracing",
@@ -2422,25 +2424,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "rsiot-http-client-config"
-version = "0.0.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b88e94522fa61b4542561bc30ae47971c1dd9eef2326e9d2da9c1d56f1d1d3b"
-dependencies = [
- "http 1.0.0",
- "rsiot-messages-core",
- "url",
-]
-
-[[package]]
 name = "rsiot-http-server"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "36660720c8b30b3e40bb46fbdb3d499d1e53705dade6be49ab3f9bebd0bb70a7"
+checksum = "9fe535b03f7e8ce236d3c1f20fc10192a546d112735cd3f9aaf05ad6c0fb7c8c"
 dependencies = [
  "axum",
  "hyper",
  "rsiot-component-core",
+ "rsiot-components-config",
  "rsiot-extra-components",
  "rsiot-messages-core",
  "tokio",
@@ -2451,9 +2443,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-messages-core"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "87b055e400426e6eeef45a83cf628b4f7d6f96a205f1105986a74805587c648b"
+checksum = "3924b857da358e21a4e7ab6fc2497957e42f92281ad7db93ae4f5604446834fa"
 dependencies = [
  "serde",
  "serde_json",
@@ -2461,9 +2453,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-modbus-client"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6d33c18b62125457ffed5950468c1ed46aab236ec7f4d01eab34dc185a400639"
+checksum = "b32b6a7dd6cf763061085142301298fd46b166da517b3def4b0785c71529f6af"
 dependencies = [
  "rsiot-component-core",
  "rsiot-components-config",
@@ -2478,28 +2470,29 @@ dependencies = [
 
 [[package]]
 name = "rsiot-redis-publisher"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "98a583fd9bf687cfefa7e0785199e9c9eb34cffa1e55d7173ecf156ff5dcc122"
+checksum = "9db044a051df8d723007dd5d784739661392b0007bd696dab7c540d8e8bf3654"
 dependencies = [
  "redis",
  "rsiot-component-core",
+ "rsiot-components-config",
  "rsiot-extra-components",
  "rsiot-messages-core",
  "tokio",
  "tracing",
- "url",
 ]
 
 [[package]]
 name = "rsiot-redis-subscriber"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f129ef24a6b6d684e78ab2106ae26c49045b9b9bcf4447362c19882ac789b4b6"
+checksum = "463145195a45f6efa88d3c30e6c61f96d85e3f470c09b474bc159f6778ddec76"
 dependencies = [
  "futures-util",
  "redis",
  "rsiot-component-core",
+ "rsiot-components-config",
  "rsiot-extra-components",
  "rsiot-messages-core",
  "tokio",
@@ -2509,9 +2502,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-timescaledb-storing"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2115cecda41ce23f212cf32f2278edfdd0605b842af07573faac424b9bd47b78"
+checksum = "ae01d1dbc9a3d6014f50ddfc8a238a560bdcbd1e90a93088800bfc770986d0ee"
 dependencies = [
  "chrono",
  "rsiot-component-core",
@@ -2524,28 +2517,29 @@ dependencies = [
 
 [[package]]
 name = "rsiot-websocket-client"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ef5d3bbe03b67e1e1ccdbef0660c467bf36c7d0ad1da1aac4f211e3ade3539e3"
+checksum = "cda8b9b174ea4cefea261e238dc1ec7235a327d6e41e06918a5efde91aa009f3"
 dependencies = [
  "futures-util",
  "rsiot-component-core",
+ "rsiot-components-config",
  "rsiot-extra-components",
  "rsiot-messages-core",
  "tokio",
  "tokio-tungstenite",
  "tracing",
- "url",
 ]
 
 [[package]]
 name = "rsiot-websocket-server"
-version = "0.0.7"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "da3f4478b71f5add6a67118f9117074e4d1be866f0fdf4eff51cc4ac8fb05963"
+checksum = "fa338c625721d64a6251706e663d3382bb4429b1824a17b0c7f31d60b5328698"
 dependencies = [
  "futures-util",
  "rsiot-component-core",
+ "rsiot-components-config",
  "rsiot-extra-components",
  "rsiot-messages-core",
  "tokio",
