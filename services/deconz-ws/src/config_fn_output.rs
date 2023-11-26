@@ -7,7 +7,7 @@ use messages::{types::SingleValue, Messages};
 
 use crate::messages_from_ws::{State, WsMessage};
 
-pub fn fn_recv(data: String) -> Vec<Messages> {
+pub fn fn_output(data: String) -> Vec<Messages> {
     let json = deserialize::<WsMessage>(&data);
     if let Ok(ws_msg) = json {
         debug!("New message: {:?}", ws_msg);
@@ -18,10 +18,7 @@ pub fn fn_recv(data: String) -> Vec<Messages> {
                     State::ZHASwitch(state) => {
                         let value = state.buttonevent;
                         let ts = state.lastupdated;
-                        let msg = Messages::ButtonEvent(SingleValue::new(
-                            value,
-                            Some(ts),
-                        ));
+                        let msg = Messages::ButtonEvent(SingleValue::new(value, Some(ts)));
                         return vec![msg];
                     }
                     _ => (),
@@ -32,10 +29,7 @@ pub fn fn_recv(data: String) -> Vec<Messages> {
                 State::ZHATemperature(state) => {
                     let temperature = state.temperature as f64 / 100.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::RoomTemperature(SingleValue::new(
-                        temperature,
-                        Some(ts),
-                    ));
+                    let msg = Messages::RoomTemperature(SingleValue::new(temperature, Some(ts)));
                     return vec![msg];
                 }
                 _ => (),
@@ -45,10 +39,7 @@ pub fn fn_recv(data: String) -> Vec<Messages> {
                 State::ZHAHumidity(state) => {
                     let humidity = state.humidity as f64 / 100.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::RoomHumidity(SingleValue::new(
-                        humidity,
-                        Some(ts),
-                    ));
+                    let msg = Messages::RoomHumidity(SingleValue::new(humidity, Some(ts)));
                     return vec![msg];
                 }
                 _ => (),
@@ -56,12 +47,9 @@ pub fn fn_recv(data: String) -> Vec<Messages> {
             // Датчик давления в комнате
             "00:15:8d:00:03:f0:44:0d-01-0403" => match ws_msg.state {
                 State::ZHAPressure(state) => {
-                    let pressure = state.pressure as f64;
+                    let pressure = (state.pressure as f64) * 1000.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::RoomPressure(SingleValue::new(
-                        pressure,
-                        Some(ts),
-                    ));
+                    let msg = Messages::RoomPressure(SingleValue::new(pressure, Some(ts)));
                     return vec![msg];
                 }
                 _ => (),

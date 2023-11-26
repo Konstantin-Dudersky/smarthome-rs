@@ -1,9 +1,9 @@
 mod global_navigation;
-mod global_state;
+mod msg_data;
 mod shell;
 
 // pub mod api;
 
 pub use global_navigation::GlobalNavigation;
-pub use global_state::{process_ws_message, GlobalState};
+pub use msg_data::{process_ws_message, MsgData};
 pub use shell::ApplicationShell;

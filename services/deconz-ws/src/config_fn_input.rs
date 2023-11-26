@@ -2,6 +2,6 @@
 
 use messages::Messages;
 
-pub fn fn_send(_msg: Messages) -> Option<String> {
+pub fn fn_input(_msg: Messages) -> Option<String> {
     None
 }

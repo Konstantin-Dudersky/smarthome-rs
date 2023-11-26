@@ -4,11 +4,11 @@ version = "0.0.1"
 edition = "2021"
 
 [dependencies]
-rsiot = { workspace = true, features = [
-    "redis-publisher",
-    "redis-subscriber",
-    "timescaledb-storing",
-] }
+openssl = { workspace = true }
+rsiot-messages-core = { workspace = true }
+rsiot-redis-publisher = { workspace = true }
+rsiot-redis-subscriber = { workspace = true }
+rsiot-timescaledb-storing = { workspace = true }
 tracing = { workspace = true }
 tokio = { workspace = true }
 

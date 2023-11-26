@@ -3,15 +3,12 @@ name = "http-server"
 version = "0.0.1"
 edition = "2021"
 
-
 [dependencies]
 openssl = { workspace = true }
 tokio = { workspace = true }
-rsiot = { workspace = true, features = [
-    "redis-publisher",
-    "redis-subscriber",
-    "http-server",
-] }
+rsiot-http-server = { workspace = true }
+rsiot-redis-publisher = { workspace = true }
+rsiot-redis-subscriber = { workspace = true }
 tracing = { workspace = true }
 
 # мои пакеты

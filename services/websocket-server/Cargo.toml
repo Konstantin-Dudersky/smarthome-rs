@@ -4,14 +4,12 @@ version = "0.0.1"
 edition.workspace = true
 
 [dependencies]
+openssl = { workspace = true }
 tokio = { workspace = true }
 tracing = { workspace = true }
-rsiot = { workspace = true, features = [
-    "redis-publisher",
-    "redis-subscriber",
-    "websocket-server",
-] }
-
+rsiot-redis-publisher = { workspace = true }
+rsiot-redis-subscriber = { workspace = true }
+rsiot-websocket-server = { workspace = true }
 env_vars = { workspace = true }
 logging = { workspace = true }
 messages = { workspace = true }

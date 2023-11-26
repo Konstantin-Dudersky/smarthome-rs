@@ -1,9 +1,17 @@
 ## Подготовка
 
-Установить пакеты 
+Установить пакеты
 
 ```bash
 npm install
+```
+
+В файле `.cargo/config.toml`:
+
+```toml
+[toolchain]
+channel = "nightly"
+targets = ["wasm32-unknown-unknown"]
 ```
 
 Запуск для отладки:

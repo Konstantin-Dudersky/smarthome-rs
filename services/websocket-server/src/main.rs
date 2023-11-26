@@ -1,7 +1,6 @@
-use rsiot::{
-    cmp_redis_publisher, cmp_redis_subscriber, cmp_websocket_server, component::ComponentChain,
-    message::IMessage,
-};
+use rsiot_redis_publisher::cmp_redis_publisher;
+use rsiot_redis_subscriber::cmp_redis_subscriber;
+use rsiot_websocket_server::{cmp_websocket_server, ComponentChain, IMessage};
 use tokio::main;
 use tracing::Level;
 

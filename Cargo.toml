@@ -34,7 +34,7 @@ tokio = { version = "1", features = ["full"] }
 
 # wasm
 gloo = { version = "0.10", features = ["console", "net", "utils"] }
-leptos = { version = "0.5.2", features = ["csr", "tracing"] }
+leptos = { version = "0.5.2", features = ["csr", "tracing", "nightly"] }
 leptos_router = { version = "0.5.2", features = ["csr"] }
 web-sys = { version = "0.3", features = ["Location", "Window"] }
 
@@ -57,6 +57,11 @@ env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
 messages = { path = "./utils/messages" }
 
-rsiot = { version = "0.0.9" }
-# TODO - удалить после выделения отдельных крейтов в свои фичи
 rsiot-messages-core = { version = "0.0.9" }
+rsiot-http-server = { version = "0.0.10" }
+rsiot-redis-publisher = { version = "0.0.10" }
+rsiot-redis-subscriber = { version = "0.0.10" }
+rsiot-timescaledb-storing = { version = "0.0.10" }
+rsiot-websocket-client = { version = "0.0.10" }
+rsiot-websocket-server = { version = "0.0.10" }
+rsiot-extra-components = { version = "0.0.10" }

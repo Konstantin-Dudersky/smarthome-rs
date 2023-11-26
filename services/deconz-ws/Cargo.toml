@@ -6,17 +6,16 @@ edition = "2021"
 
 [dependencies]
 chrono = { workspace = true }
-rsiot = { workspace = true, features = [
-    "redis-publisher",
-    "redis-subscriber",
-    "websocket-client",
-] }
+openssl = { workspace = true }
+rsiot-extra-components = { workspace = true }
+rsiot-redis-publisher = { workspace = true }
+rsiot-redis-subscriber = { workspace = true }
+rsiot-websocket-client = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 tokio = { workspace = true }
 tracing = { workspace = true }
 url = { workspace = true }
-openssl = { workspace = true }
 
 messages = { workspace = true }
 env_vars = { workspace = true }
