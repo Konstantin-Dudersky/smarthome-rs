@@ -93,7 +93,7 @@ pub fn main() {
     // );
 
     // let ws_url = format!("ws://{}:8081", window_url.host().unwrap());
-    let ws_url = "ws://target:8081";
+    let ws_url = "ws://192.168.101.10:8081";
     spawn_local(async move {
         handle_ws_connection(&ws_url, process_ws_message).await;
     });

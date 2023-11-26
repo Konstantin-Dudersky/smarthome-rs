@@ -36,6 +36,11 @@ services:
     ports:
       - "${REDIS_PORT}:6379"
       - "${REDIS_PORT_UI}:8001"
+    volumes:
+      - redis_data:/data
+      - ./services/redis/redis.conf:/redis-stack.conf
+    networks:
+      - smarthome_net
 
   loki:
     container_name: loki
@@ -122,5 +127,7 @@ volumes:
     name: db_volume
   deconz_hub_volume:
     name: deconz_hub_volume
+  redis_data:
+    name: redis_data
   portainer_data_volume:
     name: portainer_data_volume

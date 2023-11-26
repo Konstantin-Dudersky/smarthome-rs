@@ -14,6 +14,7 @@ export def main [] {
 
     # папки с конфигурациями
     rsync -vhra --relative ./services/db/ pi@target:~/smarthome/
+    rsync -vhra --relative ./services/redis/ pi@target:~/smarthome/
     rsync -vhra --relative ./services/grafana/ pi@target:~/smarthome/
     rsync -vhra --relative ./services/webapp/dist/ pi@target:~/smarthome/
     rsync -vhra --relative ./scripts pi@target:~/smarthome/
