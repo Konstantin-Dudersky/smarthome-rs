@@ -7,9 +7,9 @@ export def main [] {
     sleep 2sec
 
     ui "Start services"
-    sudo pueue add ./target/db-saver
-    sudo pueue add ./target/deconz-ws
-    sudo pueue add ./target/http-server
-    sudo pueue add ./target/websocket-server
+    sudo pueue add ./db-saver
+    sudo pueue add ./deconz-ws
+    sudo pueue add ./http-server
+    sudo pueue add ./websocket-server
     sudo pueue parallel 4
 }

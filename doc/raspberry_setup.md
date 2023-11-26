@@ -10,7 +10,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # nushell ----------------------------------------------------------------------
 sudo apt -y install pkg-config libssl-dev build-essential
-cargo install nu
+cargo install nu jazi
 
 # добавить в путь в PATH
 nano ~/.config/nushell/env.nu

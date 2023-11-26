@@ -17,6 +17,14 @@ layout {
         }
     }
 
+    tab name="files" cwd="." {
+        pane {
+            name "root"
+            command "ssh"
+            args "-t" "pi@192.168.101.10" "~/.cargo/bin/yazi"
+        }
+    }
+
     tab name="htop" cwd="." {
         pane {
             name "htop"
