@@ -3,7 +3,7 @@ use leptos_router::*;
 
 use messages::{self, types, Messages};
 use webapp_lib::{
-    components::{Button, State},
+    components::{Button, Input, InputConfig, InputConfigBuilder, State},
     define_window_url, handle_ws_connection,
 };
 
@@ -23,8 +23,14 @@ fn App() -> impl IntoView {
         // gs.send_msg.set(Some(msg));
     };
 
+    let mut input_config = InputConfigBuilder::new()
+        .set_trail(move || gs.room_temperature.get().value.to_string())
+        .build();
+
     view! {
         <div class="container mx-auto">
+            <Input config=input_config/>
+
 
             <div class="flex flex-row">
                 <div class="basis-1/2">
@@ -93,7 +99,7 @@ pub fn main() {
     // );
 
     // let ws_url = format!("ws://{}:8081", window_url.host().unwrap());
-    let ws_url = "ws://192.168.101.10:8081";
+    let ws_url = "ws://target:8081";
     spawn_local(async move {
         handle_ws_connection(&ws_url, process_ws_message).await;
     });
