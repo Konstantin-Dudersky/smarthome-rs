@@ -8,16 +8,16 @@ use rsiot_websocket_client::{cmp_websocket_client, ComponentChain};
 use tokio::main;
 use tracing::Level;
 
-use env_vars::load_config;
+use env_vars::{load_config, Config};
 use logging::configure_logging;
 
 use crate::{config_fn_input::fn_input, config_fn_output::fn_output};
 
 #[main]
 async fn main() {
-    let config = load_config().expect("Файл настроек не загружен");
+    let config = load_config::<Config>().expect("Файл настроек не загружен");
 
-    configure_logging("deconz-ws", &config.loki_url, Level::INFO)
+    configure_logging("deconz-ws", &config.loki_url(), Level::INFO)
         .await
         .expect("Логгирование не настроено");
 

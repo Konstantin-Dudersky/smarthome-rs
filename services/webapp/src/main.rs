@@ -18,13 +18,13 @@ fn App() -> impl IntoView {
         // gs.send_msg.set(Some(msg));
     };
 
-    let command_stop = move || {
+    let command_stop = move || { 
         // let msg = Messages::CommandStop(types::Command::default());
         // gs.send_msg.set(Some(msg));
     };
 
     let mut input_config = InputConfigBuilder::new()
-        .set_trail(move || gs.room_temperature.get().value.to_string())
+        // .set_trail(move || gs.room_temperature.get().value.to_string())
         .build();
 
     view! {

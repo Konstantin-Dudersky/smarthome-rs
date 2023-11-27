@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use url::Url;
 
-use rsiot_env_vars::IConfig;
+use rsiot_env_vars::IEnvVars;
 
 /// Настройки системы
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -103,4 +103,4 @@ impl Config {
     }
 }
 
-impl IConfig for Config {}
+impl IEnvVars for Config {}

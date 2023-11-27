@@ -23,5 +23,8 @@ pub fn process_ws_message(msg: &str) {
         Messages::RoomHumidity(value) => global_state.room_humidity.set(value),
         Messages::RoomTemperature(value) => global_state.room_temperature.set(value),
         Messages::RoomPressure(value) => global_state.room_pressure.set(value),
+        Messages::BathTemperature(_) => (),
+        Messages::BathHumidity(_) => (),
+        Messages::BathPressure(_) => (),
     };
 }

@@ -21,3 +21,15 @@ nu scripts/target-install.nu
 
 # TODO создаем .env файл
 ```
+
+## Systemd - дописать
+
+```bash
+sudo mv smarthome.service /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl enable smarthome
+sudo systemctl start smarthome
+
+# Проверить логи
+journalctl -xeu smarthome.service
+```

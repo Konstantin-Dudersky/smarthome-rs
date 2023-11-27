@@ -10,12 +10,18 @@ pub fn prepare_msg_from_redis_to_db(msg: Messages) -> Option<Row> {
         // SingleValue<bool>
         Messages::OpenCloseSensor(value) => {
             Some(Row::new(value.ts, &entity, "", value.value as u8 as f64))
-        } // SingleValue<f64>
+        }
+
+        // SingleValue<f64>
         Messages::RoomTemperature(value)
         | Messages::RoomHumidity(value)
-        | Messages::RoomPressure(value) => {
+        | Messages::RoomPressure(value)
+        | Messages::BathTemperature(value)
+        | Messages::BathHumidity(value)
+        | Messages::BathPressure(value) => {
             Some(Row::new(value.ts, &entity, "", value.value as f64))
         }
+        // bool
         Messages::ButtonEvent(value) => Some(Row::new(value.ts, &entity, "", value.value as f64)),
     }
 }

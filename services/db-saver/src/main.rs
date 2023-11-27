@@ -1,7 +1,7 @@
 use tokio::main;
 use tracing::Level;
 
-use env_vars::load_config;
+use env_vars::{load_config, Config};
 use logging::configure_logging;
 use rsiot_redis_subscriber::cmp_redis_subscriber;
 use rsiot_timescaledb_storing::{cmp_timescaledb_storing, ComponentChain};
@@ -10,9 +10,9 @@ mod config;
 
 #[main]
 async fn main() {
-    let config = load_config().expect("Settings not loaded");
+    let config = load_config::<Config>().expect("Settings not loaded");
 
-    configure_logging("db-saver", &config.loki_url, Level::INFO)
+    configure_logging("db-saver", &config.loki_url(), Level::INFO)
         .await
         .expect("Error in logger initialization");
 

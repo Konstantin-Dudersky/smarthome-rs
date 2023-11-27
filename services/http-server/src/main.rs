@@ -4,14 +4,15 @@ use rsiot_redis_subscriber::cmp_redis_subscriber;
 use tokio::main;
 use tracing::Level;
 
+use env_vars::{load_config, Config};
 use logging::configure_logging;
 use messages::Messages;
 
 #[main]
 async fn main() {
-    let config = env_vars::load_config().expect("Setting not loaded");
+    let config = load_config::<Config>().expect("Setting not loaded");
 
-    configure_logging("api", &config.loki_url, Level::INFO)
+    configure_logging("api", &config.loki_url(), Level::INFO)
         .await
         .expect("Error in logger initialization");
 

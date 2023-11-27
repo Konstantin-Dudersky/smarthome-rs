@@ -54,6 +54,36 @@ pub fn fn_output(data: String) -> Vec<Messages> {
                 }
                 _ => (),
             },
+            // Датчик температуры в ванной
+            "00:15:8d:00:03:cd:1c:97-01-0402" => match ws_msg.state {
+                State::ZHATemperature(state) => {
+                    let temperature = state.temperature as f64 / 100.0;
+                    let ts = state.lastupdated;
+                    let msg = Messages::BathTemperature(SingleValue::new(temperature, Some(ts)));
+                    return vec![msg];
+                }
+                _ => (),
+            },
+            // Датчик влажности в ванной
+            "00:15:8d:00:03:cd:1c:97-01-0405" => match ws_msg.state {
+                State::ZHAHumidity(state) => {
+                    let humidity = state.humidity as f64 / 100.0;
+                    let ts = state.lastupdated;
+                    let msg = Messages::BathHumidity(SingleValue::new(humidity, Some(ts)));
+                    return vec![msg];
+                }
+                _ => (),
+            },
+            // Датчик давления в ванной
+            "00:15:8d:00:03:cd:1c:97-01-0403" => match ws_msg.state {
+                State::ZHAPressure(state) => {
+                    let pressure = (state.pressure as f64) * 1000.0;
+                    let ts = state.lastupdated;
+                    let msg = Messages::BathPressure(SingleValue::new(pressure, Some(ts)));
+                    return vec![msg];
+                }
+                _ => (),
+            },
             _ => (),
         }
 

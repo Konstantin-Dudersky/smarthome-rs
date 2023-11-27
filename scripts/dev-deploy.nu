@@ -3,6 +3,6 @@ use lib/run_in_ssh.nu
 use dev-compile.nu
 
 dev-compile
-run_in_ssh "target-stop"
+ssh -t pi@target "sudo systemctl stop smarthome"
 dev-sync
-run_in_ssh "target-start"
+ssh -t pi@target "sudo systemctl start smarthome"

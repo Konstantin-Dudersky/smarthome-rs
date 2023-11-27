@@ -8,10 +8,14 @@ use crate::types;
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq)]
 pub enum Messages {
     OpenCloseSensor(types::SingleValue<bool>),
-    /// Датчик температуры / влажности
+    /// Датчик температуры / влажности в комнате
     RoomTemperature(types::SingleValue<f64>),
     RoomHumidity(types::SingleValue<f64>),
     RoomPressure(types::SingleValue<f64>),
+    /// Датчик температуры / влажности в ванной
+    BathTemperature(types::SingleValue<f64>),
+    BathHumidity(types::SingleValue<f64>),
+    BathPressure(types::SingleValue<f64>),
     /// Событие нажатия кнопки
     ButtonEvent(types::SingleValue<u16>),
 }

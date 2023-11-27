@@ -33,35 +33,31 @@ tokio = { version = "1", features = ["full"] }
 
 # wasm
 gloo = { version = "0.10", features = ["console", "net", "utils"] }
-leptos = { version = "0.5.2", features = ["csr", "tracing", "nightly"] }
+leptos = { version = "0.5.2", features = ["csr", "tracing"] }
 leptos_router = { version = "0.5.2", features = ["csr"] }
 web-sys = { version = "0.3", features = ["Location", "Window"] }
 
 # логгирование
-tracing = { version = "0.1" }
-tracing-loki = { version = "0.2" }
-tracing-subscriber = { version = "0.3" }
+tracing = { version = "0.1.40" }
+tracing-loki = { version = "0.2.4" }
+tracing-subscriber = { version = "0.3.18" }
 
 # сериализация / десериализация
-dotenvy = { version = "0.15" }
-envy = { version = "0.4" }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1" }
-toml = { version = "0.8" }
 
 # мои пакеты
-env-vars-lib = { path = "./libraries/env-vars-lib" }
 webapp-lib = { path = "./libraries/webapp-lib" }
 env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
 messages = { path = "./utils/messages" }
 
-rsiot-env-vars = { version = "0.0.11" }
-rsiot-extra-components = { version = "0.0.11" }
-rsiot-messages-core = { version = "0.0.11" }
-rsiot-http-server = { version = "0.0.11" }
-rsiot-redis-publisher = { version = "0.0.11" }
-rsiot-redis-subscriber = { version = "0.0.11" }
-rsiot-timescaledb-storing = { version = "0.0.11" }
-rsiot-websocket-client = { version = "0.0.11" }
-rsiot-websocket-server = { version = "0.0.11" }
+rsiot-env-vars = { version = "0.0.12" }
+rsiot-extra-components = { version = "0.0.12" }
+rsiot-messages-core = { version = "0.0.12" }
+rsiot-http-server = { version = "0.0.12" }
+rsiot-redis-publisher = { version = "0.0.12" }
+rsiot-redis-subscriber = { version = "0.0.12" }
+rsiot-timescaledb-storing = { version = "0.0.12" }
+rsiot-websocket-client = { version = "0.0.12" }
+rsiot-websocket-server = { version = "0.0.12" }

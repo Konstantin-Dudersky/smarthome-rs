@@ -3,11 +3,11 @@
 ## Настрока кросс-компиляции
 
 ```nu
-sudo apt install gcc-aarch64-linux-gnu;
+sudo apt install gcc-aarch64-linux-gnu
 rustup target add aarch64-unknown-linux-gnu
 ```
 
-Создать файл ~/.cargo/config:
+Создать файл ~/.cargo/config.toml:
 
 ```toml
 [target.aarch64-unknown-linux-gnu]

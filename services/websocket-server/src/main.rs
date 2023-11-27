@@ -4,14 +4,15 @@ use rsiot_websocket_server::{cmp_websocket_server, ComponentChain, IMessage};
 use tokio::main;
 use tracing::Level;
 
+use env_vars::{load_config, Config};
 use logging::configure_logging;
 use messages::Messages;
 
 #[main]
 async fn main() {
-    let config = env_vars::load_config().expect("Settings not loaded");
+    let config = load_config::<Config>().expect("Settings not loaded");
 
-    configure_logging("websocket-server", &config.loki_url, Level::DEBUG)
+    configure_logging("websocket-server", &config.loki_url(), Level::DEBUG)
         .await
         .expect("Error in logger initialization");
 
@@ -21,7 +22,7 @@ async fn main() {
             redis_channel: config.redis_channel.clone(),
         }))
         .add_cmp(cmp_websocket_server::new(cmp_websocket_server::Config {
-            port: config.api_ws_port,
+            port: config.websocket_server_port,
             fn_send_to_client: |msg: Messages| msg.to_json().ok(),
             fn_recv_from_client: |data: &str| Messages::from_json(data).ok(),
         }))
