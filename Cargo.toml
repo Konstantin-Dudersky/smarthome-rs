@@ -1,6 +1,5 @@
 [workspace]
 members = [
-    "./libraries/env-vars-lib",
     "./libraries/webapp-lib",
     "./services/deconz-ws",
     "./services/db-saver",
@@ -57,11 +56,12 @@ env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
 messages = { path = "./utils/messages" }
 
-rsiot-messages-core = { version = "0.0.9" }
-rsiot-http-server = { version = "0.0.10" }
-rsiot-redis-publisher = { version = "0.0.10" }
-rsiot-redis-subscriber = { version = "0.0.10" }
-rsiot-timescaledb-storing = { version = "0.0.10" }
-rsiot-websocket-client = { version = "0.0.10" }
-rsiot-websocket-server = { version = "0.0.10" }
-rsiot-extra-components = { version = "0.0.10" }
+rsiot-env-vars = { version = "0.0.11" }
+rsiot-extra-components = { version = "0.0.11" }
+rsiot-messages-core = { version = "0.0.11" }
+rsiot-http-server = { version = "0.0.11" }
+rsiot-redis-publisher = { version = "0.0.11" }
+rsiot-redis-subscriber = { version = "0.0.11" }
+rsiot-timescaledb-storing = { version = "0.0.11" }
+rsiot-websocket-client = { version = "0.0.11" }
+rsiot-websocket-server = { version = "0.0.11" }

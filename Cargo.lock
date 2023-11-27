@@ -722,25 +722,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "env-vars-lib"
-version = "0.0.1"
-dependencies = [
- "clap",
- "dotenvy",
- "envy",
- "serde",
- "toml 0.8.8",
- "tracing",
-]
-
-[[package]]
 name = "env_vars"
 version = "0.0.1"
 dependencies = [
- "clap",
- "env-vars-lib",
+ "rsiot-env-vars",
  "serde",
- "tracing",
  "tracing-subscriber",
  "url",
 ]
@@ -1225,9 +1211,9 @@ dependencies = [
 
 [[package]]
 name = "hashbrown"
-version = "0.14.2"
+version = "0.14.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f93e7192158dbcda357bdec5fb5788eebf8bbac027f3f33e719d29135ae84156"
+checksum = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
 dependencies = [
  "ahash 0.8.6",
  "allocator-api2",
@@ -1239,7 +1225,7 @@ version = "0.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e8094feaf31ff591f651a2664fb9cfd92bba7a60ce3197265e9482ebe753c8f7"
 dependencies = [
- "hashbrown 0.14.2",
+ "hashbrown 0.14.3",
 ]
 
 [[package]]
@@ -1442,7 +1428,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d530e1a18b1cb4c484e6e34556a0d948706958449fca0cab753d649f2bce3d1f"
 dependencies = [
  "equivalent",
- "hashbrown 0.14.2",
+ "hashbrown 0.14.3",
 ]
 
 [[package]]
@@ -2362,9 +2348,9 @@ dependencies = [
 
 [[package]]
 name = "redis"
-version = "0.23.3"
+version = "0.23.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f49cdc0bb3f412bf8e7d1bd90fe1d9eb10bc5c399ba90973c14662a27b3f8ba"
+checksum = "1326371ccc7b3cd1c0c603f6eb3490a1ddecf1e7fb4a3caacf5db4684f5a7db9"
 dependencies = [
  "async-trait",
  "bytes",
@@ -2516,9 +2502,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-component-core"
-version = "0.0.9"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "24023b410889eb82ccf0877e89bc1777f9bf46238a81343d5cfdd5a3df4239f1"
+checksum = "27eb998182bea78b7671c3990b6b33cad22f6e0ce8cf7aec577b38384dc0984c"
 dependencies = [
  "futures",
  "rsiot-messages-core",
@@ -2528,9 +2514,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-components-config"
-version = "0.0.9"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b3ba304c6260c99526363bb3507cbc7facc9c6efcb478fb395b86ac1ba022e56"
+checksum = "0cea93f8884e329d09a7eb1a95ec5d895a2f4e9a232230086e7f2d62b2d740f4"
 dependencies = [
  "http 1.0.0",
  "rsiot-messages-core",
@@ -2538,10 +2524,24 @@ dependencies = [
 ]
 
 [[package]]
-name = "rsiot-extra-components"
-version = "0.0.10"
+name = "rsiot-env-vars"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "36ce42dd88836a71d18cdffa09da5a36b57b1347665620d27c426bef37015b2c"
+checksum = "61dc83ab43871c4edf6782f5db0560058de7d577d19da1731ae78072ef84c0b9"
+dependencies = [
+ "clap",
+ "dotenvy",
+ "envy",
+ "serde",
+ "toml 0.8.8",
+ "tracing",
+]
+
+[[package]]
+name = "rsiot-extra-components"
+version = "0.0.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ac3f7ff84ace717824c3a726c9e1772e8bfb3b9370b33fcb29e99489695c7fe9"
 dependencies = [
  "rsiot-component-core",
  "rsiot-messages-core",
@@ -2551,9 +2551,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-http-server"
-version = "0.0.10"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c2cbec7a144d4e1f47d4f5142e3f254d2d040aad46288ed671e46eab623f69be"
+checksum = "88a2e73706ea29160cd300f15941c5c6a91c87a0d7420db01e5395bd22b91ac6"
 dependencies = [
  "axum",
  "hyper",
@@ -2569,9 +2569,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-messages-core"
-version = "0.0.9"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3924b857da358e21a4e7ab6fc2497957e42f92281ad7db93ae4f5604446834fa"
+checksum = "fd8510eaa83e6395d8314f01cf33ca051334fd75e4630096af1bfe8a496b5eac"
 dependencies = [
  "serde",
  "serde_json",
@@ -2579,9 +2579,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-redis-publisher"
-version = "0.0.10"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb14815d27303aacf63942033493436769b8b3b17b390efb387de989cd5a05df"
+checksum = "8631f1552118b61187ea89fa06f8dc85d2a2c6a7e3fcc0f5e1ec8c962819070a"
 dependencies = [
  "redis",
  "rsiot-component-core",
@@ -2594,9 +2594,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-redis-subscriber"
-version = "0.0.10"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f952bdb7fb321a06421d4e348706c6df0899e26d9fa4d2c5d81cac34dec680a"
+checksum = "4d936a39e0a40ba2d137da4fc9f8beef62f13c5db5cf46773e5843e7c15b06e6"
 dependencies = [
  "futures-util",
  "redis",
@@ -2611,9 +2611,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-timescaledb-storing"
-version = "0.0.10"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0f46ef0461ef7a6f01482ff384cdbac83031b353149e1470e72c099f4dd166c6"
+checksum = "b277e2a70a4a86dd4782b0573cce1ec30548d6e6f9d10c2ad9e8106f86ec5258"
 dependencies = [
  "chrono",
  "rsiot-component-core",
@@ -2626,9 +2626,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-websocket-client"
-version = "0.0.10"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50f145b65795b981335e671261947e1feb7435adc15e78ad77b3111ea760b52c"
+checksum = "24b46eb5a9816e3f79deeec67b036ab530354642255c84932f864325355019ff"
 dependencies = [
  "futures-util",
  "rsiot-component-core",
@@ -2642,9 +2642,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-websocket-server"
-version = "0.0.10"
+version = "0.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2f0d23fb25381b34570749993162d078254234db00985508bd608ded6b080ef"
+checksum = "f47c77bb58fa3c5d8a14858fa7d05936912fb83bc117384f901588751bc91769"
 dependencies = [
  "futures-util",
  "rsiot-component-core",
