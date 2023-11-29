@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 openssl = { version = "0.10", features = ["vendored"] }
-rsiot = { version = "0.0.14", features = [
+rsiot = { version = "0.0.15", features = [
     "http-server",
     "redis-publisher",
     "redis-subscriber",

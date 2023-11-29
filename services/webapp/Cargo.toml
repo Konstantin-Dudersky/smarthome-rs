@@ -13,5 +13,6 @@ tracing-subscriber = { workspace = true }
 url = { workspace = true }
 
 rsiot-messages-core = { workspace = true }
+rsiot = { version = "0.0.14", features = [] }
 messages = { workspace = true }
 webapp-lib = { workspace = true }
