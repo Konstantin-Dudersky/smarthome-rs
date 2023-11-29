@@ -8,6 +8,7 @@ edition = "2021"
 chrono = { workspace = true }
 openssl = { workspace = true }
 rsiot-extra-components = { workspace = true }
+rsiot-messages-core = { workspace = true }
 rsiot-redis-publisher = { workspace = true }
 rsiot-redis-subscriber = { workspace = true }
 rsiot-websocket-client = { workspace = true }

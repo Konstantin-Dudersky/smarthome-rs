@@ -1,7 +1,6 @@
 use messages::Messages;
 
 use rsiot_messages_core::IMessage;
-use rsiot_timescaledb_storing::cmp_timescaledb_storing::Row;
 
 /// Преобразование сообщений из Redis в строки для базы данных
 pub fn prepare_msg_from_redis_to_db(msg: Messages) -> Option<Row> {

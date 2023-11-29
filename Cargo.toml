@@ -3,7 +3,6 @@ members = [
     "./libraries/webapp-lib",
     "./services/deconz-ws",
     "./services/db-saver",
-    "./services/http-server",
     "./services/webapp",
     "./services/websocket-server",
     "./utils/env_vars",
@@ -53,12 +52,11 @@ env_vars = { path = "./utils/env_vars" }
 logging = { path = "./utils/logging" }
 messages = { path = "./utils/messages" }
 
-rsiot-env-vars = { version = "0.0.12" }
-rsiot-extra-components = { version = "0.0.12" }
-rsiot-messages-core = { version = "0.0.12" }
-rsiot-http-server = { version = "0.0.12" }
-rsiot-redis-publisher = { version = "0.0.12" }
-rsiot-redis-subscriber = { version = "0.0.12" }
-rsiot-timescaledb-storing = { version = "0.0.12" }
-rsiot-websocket-client = { version = "0.0.12" }
-rsiot-websocket-server = { version = "0.0.12" }
+rsiot-env-vars = { version = "0.0.13" }
+rsiot-extra-components = { version = "0.0.14" }
+rsiot-messages-core = { version = "0.0.14" }
+rsiot-redis-publisher = { version = "0.0.14" }
+rsiot-redis-subscriber = { version = "0.0.14" }
+rsiot-timescaledb-storing = { version = "0.0.14" }
+rsiot-websocket-client = { version = "0.0.14" }
+rsiot-websocket-server = { version = "0.0.14" }

@@ -1,17 +1,18 @@
 use leptos::*;
 use url::Url;
 
-use messages::{types, IMessage, Messages};
+use messages::{IMessage, Messages};
+use rsiot_messages_core::msg_types;
 
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MsgData {
-    pub room_temperature: RwSignal<types::SingleValue<f64>>,
-    pub room_humidity: RwSignal<types::SingleValue<f64>>,
-    pub room_pressure: RwSignal<types::SingleValue<f64>>,
+    pub room_temperature: RwSignal<msg_types::Value<f64>>,
+    pub room_humidity: RwSignal<msg_types::Value<f64>>,
+    pub room_pressure: RwSignal<msg_types::Value<f64>>,
 
     pub send_msg: RwSignal<Option<Messages>>,
     pub window_url: RwSignal<Option<Url>>,
-    pub motor_state: RwSignal<types::SingleValue<i16>>,
+    pub motor_state: RwSignal<msg_types::Value<i16>>,
 }
 
 pub fn process_ws_message(msg: &str) {

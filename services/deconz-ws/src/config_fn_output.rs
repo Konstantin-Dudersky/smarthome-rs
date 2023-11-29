@@ -3,7 +3,8 @@
 use serde_json::from_str as deserialize;
 use tracing::{debug, warn};
 
-use messages::{types::SingleValue, Messages};
+use messages::Messages;
+use rsiot_messages_core::msg_types;
 
 use crate::messages_from_ws::{State, WsMessage};
 
@@ -18,7 +19,7 @@ pub fn fn_output(data: String) -> Vec<Messages> {
                     State::ZHASwitch(state) => {
                         let value = state.buttonevent;
                         let ts = state.lastupdated;
-                        let msg = Messages::ButtonEvent(SingleValue::new(value, Some(ts)));
+                        let msg = Messages::ButtonEvent(msg_types::Value::new_with_ts(value, ts));
                         return vec![msg];
                     }
                     _ => (),
@@ -29,7 +30,8 @@ pub fn fn_output(data: String) -> Vec<Messages> {
                 State::ZHATemperature(state) => {
                     let temperature = state.temperature as f64 / 100.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::RoomTemperature(SingleValue::new(temperature, Some(ts)));
+                    let msg =
+                        Messages::RoomTemperature(msg_types::Value::new_with_ts(temperature, ts));
                     return vec![msg];
                 }
                 _ => (),
@@ -39,7 +41,7 @@ pub fn fn_output(data: String) -> Vec<Messages> {
                 State::ZHAHumidity(state) => {
                     let humidity = state.humidity as f64 / 100.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::RoomHumidity(SingleValue::new(humidity, Some(ts)));
+                    let msg = Messages::RoomHumidity(msg_types::Value::new_with_ts(humidity, ts));
                     return vec![msg];
                 }
                 _ => (),
@@ -49,7 +51,7 @@ pub fn fn_output(data: String) -> Vec<Messages> {
                 State::ZHAPressure(state) => {
                     let pressure = (state.pressure as f64) * 1000.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::RoomPressure(SingleValue::new(pressure, Some(ts)));
+                    let msg = Messages::RoomPressure(msg_types::Value::new_with_ts(pressure, ts));
                     return vec![msg];
                 }
                 _ => (),
@@ -59,7 +61,8 @@ pub fn fn_output(data: String) -> Vec<Messages> {
                 State::ZHATemperature(state) => {
                     let temperature = state.temperature as f64 / 100.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::BathTemperature(SingleValue::new(temperature, Some(ts)));
+                    let msg =
+                        Messages::BathTemperature(msg_types::Value::new_with_ts(temperature, ts));
                     return vec![msg];
                 }
                 _ => (),
@@ -69,7 +72,7 @@ pub fn fn_output(data: String) -> Vec<Messages> {
                 State::ZHAHumidity(state) => {
                     let humidity = state.humidity as f64 / 100.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::BathHumidity(SingleValue::new(humidity, Some(ts)));
+                    let msg = Messages::BathHumidity(msg_types::Value::new_with_ts(humidity, ts));
                     return vec![msg];
                 }
                 _ => (),
@@ -79,7 +82,7 @@ pub fn fn_output(data: String) -> Vec<Messages> {
                 State::ZHAPressure(state) => {
                     let pressure = (state.pressure as f64) * 1000.0;
                     let ts = state.lastupdated;
-                    let msg = Messages::BathPressure(SingleValue::new(pressure, Some(ts)));
+                    let msg = Messages::BathPressure(msg_types::Value::new_with_ts(pressure, ts));
                     return vec![msg];
                 }
                 _ => (),

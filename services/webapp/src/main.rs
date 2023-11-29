@@ -1,7 +1,7 @@
 use leptos::*;
 use leptos_router::*;
 
-use messages::{self, types, Messages};
+use messages::{self, Messages};
 use webapp_lib::{
     components::{Button, Input, InputConfig, InputConfigBuilder, State},
     define_window_url, handle_ws_connection,
@@ -18,7 +18,7 @@ fn App() -> impl IntoView {
         // gs.send_msg.set(Some(msg));
     };
 
-    let command_stop = move || { 
+    let command_stop = move || {
         // let msg = Messages::CommandStop(types::Command::default());
         // gs.send_msg.set(Some(msg));
     };

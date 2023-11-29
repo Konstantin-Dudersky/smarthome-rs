@@ -9,7 +9,7 @@ export def main [] {
     # бинарники
     rsync -vhra ./target/aarch64-unknown-linux-gnu/release/deconz-ws pi@target:~/smarthome/
     rsync -vhra ./target/aarch64-unknown-linux-gnu/release/db-saver pi@target:~/smarthome/
-    rsync -vhra ./target/aarch64-unknown-linux-gnu/release/http-server pi@target:~/smarthome/
+    rsync -vhra ./http-server/target/aarch64-unknown-linux-gnu/release/http-server pi@target:~/smarthome/
     rsync -vhra ./target/aarch64-unknown-linux-gnu/release/websocket-server pi@target:~/smarthome/
 
     # папки с конфигурациями

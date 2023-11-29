@@ -190,59 +190,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
-name = "axum"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "810a80b128d70e6ed2bdf3fe8ed72c0ae56f5f5948d01c2753282dd92a84fce8"
-dependencies = [
- "async-trait",
- "axum-core",
- "bytes",
- "futures-util",
- "http 1.0.0",
- "http-body 1.0.0",
- "http-body-util",
- "hyper 1.0.1",
- "hyper-util",
- "itoa",
- "matchit",
- "memchr",
- "mime",
- "percent-encoding",
- "pin-project-lite",
- "rustversion",
- "serde",
- "serde_json",
- "serde_path_to_error",
- "serde_urlencoded",
- "sync_wrapper",
- "tokio",
- "tower",
- "tower-layer",
- "tower-service",
-]
-
-[[package]]
-name = "axum-core"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "de0ddc355eab88f4955090a823715df47acf0b7660aab7a69ad5ce6301ee3b73"
-dependencies = [
- "async-trait",
- "bytes",
- "futures-util",
- "http 1.0.0",
- "http-body 1.0.0",
- "http-body-util",
- "mime",
- "pin-project-lite",
- "rustversion",
- "sync_wrapper",
- "tower-layer",
- "tower-service",
-]
-
-[[package]]
 name = "backtrace"
 version = "0.3.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -605,6 +552,7 @@ dependencies = [
  "messages",
  "openssl",
  "rsiot-extra-components",
+ "rsiot-messages-core",
  "rsiot-redis-publisher",
  "rsiot-redis-subscriber",
  "rsiot-websocket-client",
@@ -1147,25 +1095,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "h2"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e1d308f63daf4181410c242d34c11f928dcb3aa105852019e043c9d1f4e4368a"
-dependencies = [
- "bytes",
- "fnv",
- "futures-core",
- "futures-sink",
- "futures-util",
- "http 1.0.0",
- "indexmap",
- "slab",
- "tokio",
- "tokio-util",
- "tracing",
-]
-
-[[package]]
 name = "half"
 version = "1.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1281,44 +1210,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "http-body"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1cac85db508abc24a2e48553ba12a996e87244a0395ce011e62b37158745d643"
-dependencies = [
- "bytes",
- "http 1.0.0",
-]
-
-[[package]]
-name = "http-body-util"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41cb79eb393015dadd30fc252023adb0b2400a0caee0fa2a077e6e21a551e840"
-dependencies = [
- "bytes",
- "futures-util",
- "http 1.0.0",
- "http-body 1.0.0",
- "pin-project-lite",
-]
-
-[[package]]
-name = "http-server"
-version = "0.0.1"
-dependencies = [
- "env_vars",
- "logging",
- "messages",
- "openssl",
- "rsiot-http-server",
- "rsiot-redis-publisher",
- "rsiot-redis-subscriber",
- "tokio",
- "tracing",
-]
-
-[[package]]
 name = "httparse"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1340,9 +1231,9 @@ dependencies = [
  "futures-channel",
  "futures-core",
  "futures-util",
- "h2 0.3.22",
+ "h2",
  "http 0.2.11",
- "http-body 0.4.5",
+ "http-body",
  "httparse",
  "httpdate",
  "itoa",
@@ -1355,55 +1246,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "hyper"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "403f9214f3e703236b221f1a9cd88ec8b4adfa5296de01ab96216361f4692f56"
-dependencies = [
- "bytes",
- "futures-channel",
- "futures-util",
- "h2 0.4.0",
- "http 1.0.0",
- "http-body 1.0.0",
- "httparse",
- "httpdate",
- "itoa",
- "pin-project-lite",
- "tokio",
-]
-
-[[package]]
 name = "hyper-tls"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d6183ddfa99b85da61a140bea0efc93fdf56ceaa041b37d553518030827f9905"
 dependencies = [
  "bytes",
- "hyper 0.14.27",
+ "hyper",
  "native-tls",
  "tokio",
  "tokio-native-tls",
-]
-
-[[package]]
-name = "hyper-util"
-version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9ca339002caeb0d159cc6e023dff48e199f081e42fa039895c7c6f38b37f2e9d"
-dependencies = [
- "bytes",
- "futures-channel",
- "futures-util",
- "http 1.0.0",
- "http-body 1.0.0",
- "hyper 1.0.1",
- "pin-project-lite",
- "socket2 0.5.5",
- "tokio",
- "tower",
- "tower-service",
- "tracing",
 ]
 
 [[package]]
@@ -1778,12 +1630,6 @@ dependencies = [
  "proc-macro2",
  "quote",
 ]
-
-[[package]]
-name = "matchit"
-version = "0.7.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0e7465ac9959cc2b1404e8e2367b43684a6d13790fe23056cc8c6c5a6b7bcb94"
 
 [[package]]
 name = "md-5"
@@ -2407,10 +2253,10 @@ dependencies = [
  "encoding_rs",
  "futures-core",
  "futures-util",
- "h2 0.3.22",
+ "h2",
  "http 0.2.11",
- "http-body 0.4.5",
- "hyper 0.14.27",
+ "http-body",
+ "hyper",
  "hyper-tls",
  "ipnet",
  "js-sys",
@@ -2456,9 +2302,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-component-core"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b6e1560b17e21a578e55b49b308f60f7114cf45e03bdd13f3b6eefe89a3a56e"
+checksum = "98707b987dbb6197168a1b2f0a392913cc7925573207407a9a0c989111913b3c"
 dependencies = [
  "futures",
  "rsiot-messages-core",
@@ -2468,9 +2314,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-components-config"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c2cca62725d6c7765828a7af966da18fd4bd2a4f6d061d7df98a405ff818b659"
+checksum = "86280de300ec1d8c5136e610f6f47db98e244f6a10d4d3511d37161c679a229b"
 dependencies = [
  "http 1.0.0",
  "rsiot-messages-core",
@@ -2479,9 +2325,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-env-vars"
-version = "0.0.12"
+version = "0.0.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "832e38ed78395d8abf0f65ed7287ea4de05a720df3b5ef5c3250b80674e4768c"
+checksum = "82c7f10d658faef94ef82d4acb6a7d6be03401c4b5f95873e911df092008f896"
 dependencies = [
  "clap",
  "dotenvy",
@@ -2493,48 +2339,32 @@ dependencies = [
 
 [[package]]
 name = "rsiot-extra-components"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8bde6288996ed833b2d6f85cc9ac0f24464be7c5915e294561ca8420b0482f8d"
+checksum = "a8eb5f121db3e85dbd99022ac3335cae55846b8b032b0e2e568ba9fd360a294a"
 dependencies = [
  "rsiot-component-core",
  "rsiot-messages-core",
  "tokio",
  "tracing",
-]
-
-[[package]]
-name = "rsiot-http-server"
-version = "0.0.12"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8518260354b7deda0de059b0c00d8ae04b89134554ce6ff1e18896bcecc8073d"
-dependencies = [
- "axum",
- "rsiot-component-core",
- "rsiot-components-config",
- "rsiot-extra-components",
- "rsiot-messages-core",
- "tokio",
- "tower-http",
- "tracing",
- "url",
 ]
 
 [[package]]
 name = "rsiot-messages-core"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b9445535267f8a0a977fcac4f0c61613f5bdc92545ce102977bbbe9021e73676"
+checksum = "49d2ee2869d6a480ef08598feba4dd8c0c31f40b18dc38cd6cd1c2faeb926796"
 dependencies = [
+ "chrono",
  "serde",
  "serde_json",
 ]
 
 [[package]]
 name = "rsiot-redis-publisher"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e0614398a2b4aa4724d1602c1b2b7228b35c1e9a7b5e30c4fa829f525336aa9c"
+checksum = "d9be042b1c3d56a36abd51b50aee4d8c1a5ebe8c92d4dea46b77a705292c343c"
 dependencies = [
  "redis",
  "rsiot-component-core",
@@ -2547,9 +2377,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-redis-subscriber"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fe9dfadc67e6ca19d5d94646bdb638504d848d9554ad6083d98e13f84f6b18be"
+checksum = "e353a3225104009d63cb20f92e9d383129469eaab4c730e904fc73414cfb25a1"
 dependencies = [
  "futures-util",
  "redis",
@@ -2564,12 +2394,13 @@ dependencies = [
 
 [[package]]
 name = "rsiot-timescaledb-storing"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a751614800dbeafc92bc23c937af08bcd7a641b2482b9b904a4c155e0cea4c02"
+checksum = "e6c9ccd3fbe2ba1d2cd0ab60d576ef32921b22485808dd595aae0d1a7329b3a1"
 dependencies = [
  "chrono",
  "rsiot-component-core",
+ "rsiot-components-config",
  "rsiot-messages-core",
  "sqlx",
  "tokio",
@@ -2579,9 +2410,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-websocket-client"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bfe8e34359b54ffdf22a607765ef9490fb57bb570ef27b2cf691e09d15554f09"
+checksum = "ae270191597292934d697fa7d947a68ded8668cbae9a2ae7e9be36094fe6e9c3"
 dependencies = [
  "futures-util",
  "rsiot-component-core",
@@ -2595,9 +2426,9 @@ dependencies = [
 
 [[package]]
 name = "rsiot-websocket-server"
-version = "0.0.12"
+version = "0.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "24be13e571053ea6cdfc76cb1838b1a3f1f78bd62059168beaec2eed29824dd6"
+checksum = "e73d8b24e5cad7fd648b3ccc87226f155ba6b9c90ef237c42114962bbbce39ad"
 dependencies = [
  "futures-util",
  "rsiot-component-core",
@@ -2765,16 +2596,6 @@ checksum = "3d1c7e3eac408d115102c4c24ad393e0821bb3a5df4d506a80f85f7a742a526b"
 dependencies = [
  "itoa",
  "ryu",
- "serde",
-]
-
-[[package]]
-name = "serde_path_to_error"
-version = "0.1.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4beec8bce849d58d06238cb50db2e1c417cfeafa4c63f692b15c82b7c80f8335"
-dependencies = [
- "itoa",
  "serde",
 ]
 
@@ -3270,12 +3091,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "sync_wrapper"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2047c6ded9c721764247e62cd3b03c09ffc529b2ba5b10ec482ae507a4a70160"
-
-[[package]]
 name = "system-configuration"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3484,46 +3299,6 @@ dependencies = [
  "toml_datetime",
  "winnow",
 ]
-
-[[package]]
-name = "tower"
-version = "0.4.13"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b8fa9be0de6cf49e536ce1851f987bd21a43b771b09473c3549a6c853db37c1c"
-dependencies = [
- "futures-core",
- "futures-util",
- "pin-project",
- "pin-project-lite",
- "tokio",
- "tower-layer",
- "tower-service",
- "tracing",
-]
-
-[[package]]
-name = "tower-http"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09e12e6351354851911bdf8c2b8f2ab15050c567d70a8b9a37ae7b8301a4080d"
-dependencies = [
- "bitflags 2.4.1",
- "bytes",
- "futures-util",
- "http 1.0.0",
- "http-body 1.0.0",
- "http-body-util",
- "pin-project-lite",
- "tower-layer",
- "tower-service",
- "tracing",
-]
-
-[[package]]
-name = "tower-layer"
-version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c20c8dbed6283a09604c3e69b4b7eeb54e298b8a600d4d5ecb5ad39de609f1d0"
 
 [[package]]
 name = "tower-service"
@@ -3893,6 +3668,7 @@ dependencies = [
  "leptos",
  "leptos_router",
  "messages",
+ "rsiot-messages-core",
  "tracing",
  "tracing-subscriber",
  "url",
