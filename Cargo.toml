@@ -11,6 +11,7 @@ members = [
     "./utils/messages",
 ]
 resolver = "2"
+exclude = ["./http-server"]
 
 [workspace.package]
 edition = "2021"
