@@ -5,14 +5,13 @@ edition = "2021"
 
 
 [dependencies]
-gloo = { workspace = true }
-leptos = { workspace = true }
-leptos_router = { workspace = true }
-tracing = { workspace = true }
-tracing-subscriber = { workspace = true }
-url = { workspace = true }
+gloo = { version = "0.10", features = ["console", "net", "utils"] }
+leptos = { version = "0.5.2", features = ["csr", "tracing"] }
+leptos_router = { version = "0.5.2", features = ["csr"] }
+rsiot = { version = "0.0.16", features = [] }
+tracing = { version = "0.1.40" }
+tracing-subscriber = { version = "0.3.18" }
+url = { version = "2.4", features = ["serde"] }
 
-rsiot-messages-core = { workspace = true }
-rsiot = { version = "0.0.14", features = [] }
-messages = { workspace = true }
-webapp-lib = { workspace = true }
+messages = { path = "../../utils/messages" }
+webapp-lib = { path = "../../libraries/webapp-lib" }

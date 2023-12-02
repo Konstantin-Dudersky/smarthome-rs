@@ -5,21 +5,21 @@ edition = "2021"
 
 
 [dependencies]
-chrono = { workspace = true }
-openssl = { workspace = true }
-rsiot-extra-components = { workspace = true }
-rsiot-messages-core = { workspace = true }
-rsiot-redis-publisher = { workspace = true }
-rsiot-redis-subscriber = { workspace = true }
-rsiot-websocket-client = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
-tokio = { workspace = true }
-tracing = { workspace = true }
-url = { workspace = true }
+chrono = { version = "0.4", features = ["serde"] }
+openssl = { version = "0.10", features = ["vendored"] }
+rsiot = { version = "0.0.16", features = [
+    "redis-publisher",
+    "redis-subscriber",
+    "websocket-client",
+] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+tokio = { version = "1", features = ["full"] }
+tracing = { version = "0.1.40" }
+url = { version = "2.4", features = ["serde"] }
 
-messages = { workspace = true }
-env_vars = { workspace = true }
-logging = { workspace = true }
+logging = { path = "../../utils/logging" }
+messages = { path = "../../utils/messages" }
+env_vars = { path = "../../utils/env_vars" }
 
 [dev-dependencies]

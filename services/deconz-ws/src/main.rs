@@ -2,9 +2,10 @@ mod config_fn_input;
 mod config_fn_output;
 mod messages_from_ws;
 
-use rsiot_extra_components::cmp_logger;
-use rsiot_redis_publisher::cmp_redis_publisher;
-use rsiot_websocket_client::{cmp_websocket_client, ComponentChain};
+use rsiot::{
+    cmp_redis_publisher, cmp_websocket_client,
+    component::{cmp_logger, ComponentChain},
+};
 use tokio::main;
 use tracing::Level;
 

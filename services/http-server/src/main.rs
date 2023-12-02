@@ -1,5 +1,6 @@
-use rsiot::{cmp_http_server, cmp_redis_publisher, cmp_redis_subscriber};
-use rsiot_component_core::ComponentChain;
+use rsiot::{
+    cmp_http_server, cmp_redis_publisher, cmp_redis_subscriber, component::ComponentChain,
+};
 use tokio::main;
 use tracing::Level;
 

@@ -2,7 +2,7 @@ use leptos::*;
 use url::Url;
 
 use messages::{IMessage, Messages};
-use rsiot_messages_core::msg_types;
+use rsiot::message::msg_types;
 
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MsgData {

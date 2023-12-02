@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use rsiot_messages_core::{eav_helpers, msg_types, IMessage};
+use rsiot::message::{eav, eav_helpers, msg_types, IMessage};
 
 /// Все сообщения в системе
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq)]
@@ -19,7 +19,7 @@ pub enum Messages {
 }
 
 impl IMessage for Messages {
-    fn into_eav(self) -> Vec<rsiot_messages_core::eav::EavModel> {
+    fn into_eav(self) -> Vec<eav::EavModel> {
         match self {
             Messages::OpenCloseSensor(_) => vec![],
             Messages::RoomTemperature(val) => eav_helpers::ValueInstant {

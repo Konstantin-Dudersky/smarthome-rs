@@ -1,15 +1,18 @@
 [package]
 name = "websocket-server"
 version = "0.0.1"
-edition.workspace = true
+edition = "2021"
 
 [dependencies]
-openssl = { workspace = true }
-tokio = { workspace = true }
-tracing = { workspace = true }
-rsiot-redis-publisher = { workspace = true }
-rsiot-redis-subscriber = { workspace = true }
-rsiot-websocket-server = { workspace = true }
-env_vars = { workspace = true }
-logging = { workspace = true }
-messages = { workspace = true }
+openssl = { version = "0.10", features = ["vendored"] }
+rsiot = { version = "0.0.16", features = [
+    "redis-publisher",
+    "redis-subscriber",
+    "websocket-server",
+] }
+tokio = { version = "1", features = ["full"] }
+tracing = { version = "0.1.40" }
+
+env_vars = { path = "../../utils/env_vars" }
+logging = { path = "../../utils/logging" }
+messages = { path = "../../utils/messages" }

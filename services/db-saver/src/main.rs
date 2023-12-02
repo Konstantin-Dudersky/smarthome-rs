@@ -4,8 +4,7 @@ use tracing::Level;
 use env_vars::{load_config, Config};
 use logging::configure_logging;
 use messages::Messages;
-use rsiot_redis_subscriber::cmp_redis_subscriber;
-use rsiot_timescaledb_storing::{cmp_timescaledb_storing, ComponentChain};
+use rsiot::{cmp_redis_subscriber, cmp_timescaledb_storing, component::ComponentChain};
 
 #[main]
 async fn main() {

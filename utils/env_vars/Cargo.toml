@@ -5,8 +5,8 @@ edition = "2021"
 
 
 [dependencies]
-serde = { workspace = true }
-tracing-subscriber = { workspace = true }
-url = { workspace = true }
+serde = { version = "1", features = ["derive"] }
+url = { version = "2.4", features = ["serde"] }
 
-rsiot-env-vars = { workspace = true }
+# TODO - перенести в rsiot
+rsiot-env-vars = { version = "0.0.16" }

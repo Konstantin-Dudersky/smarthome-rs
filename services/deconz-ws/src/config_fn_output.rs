@@ -4,7 +4,7 @@ use serde_json::from_str as deserialize;
 use tracing::{debug, warn};
 
 use messages::Messages;
-use rsiot_messages_core::msg_types;
+use rsiot::message::msg_types;
 
 use crate::messages_from_ws::{State, WsMessage};
 

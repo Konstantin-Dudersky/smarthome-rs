@@ -1,10 +1,9 @@
 [package]
 name = "messages"
 version = "0.0.1"
-edition.workspace = true
-license.workspace = true
+edition = "2021"
 
 [dependencies]
-chrono = { workspace = true }
-serde = { workspace = true }
-rsiot-messages-core = { workspace = true }
+chrono = { version = "*" }
+serde = { version = "*" }
+rsiot = { version = "0.0.16" }
