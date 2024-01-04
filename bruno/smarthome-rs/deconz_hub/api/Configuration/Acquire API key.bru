@@ -1,0 +1,23 @@
+meta {
+  name: Acquire API key
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{ _.deconz_hub_host }}:{{ _.deconz_hub_port_api }}/api
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+      "username": "1234567890",
+      "devicetype": "smarthome"
+  }
+  
+}

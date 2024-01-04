@@ -3,7 +3,7 @@ use leptos_router::*;
 
 use messages::{self, Messages};
 use webapp_lib::{
-    components::{Button, Input, InputConfig, InputConfigBuilder, State},
+    components::{Button, Input, InputConfig},
     define_window_url, handle_ws_connection,
 };
 
@@ -23,9 +23,8 @@ fn App() -> impl IntoView {
         // gs.send_msg.set(Some(msg));
     };
 
-    let mut input_config = InputConfigBuilder::new()
-        // .set_trail(move || gs.room_temperature.get().value.to_string())
-        .build();
+    let mut input_config =
+        InputConfig::new().set_trail(move || gs.room_temperature.get().value.to_string());
 
     view! {
         <div class="container mx-auto">

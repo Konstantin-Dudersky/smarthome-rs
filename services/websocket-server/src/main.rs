@@ -1,13 +1,17 @@
 use rsiot::{
-    cmp_redis_publisher, cmp_redis_subscriber, cmp_websocket_server, component::ComponentChain,
-    message::IMessage, 
+    component_core::ComponentCollection,
+    components::{cmp_redis_client, cmp_websocket_server},
+    message::IMessage,
 };
-use tokio::main;
-use tracing::Level;
+use tokio::{
+    main,
+    time::{sleep, Duration},
+};
+use tracing::{error, Level};
 
 use env_vars::{load_config, Config};
 use logging::configure_logging;
-use messages::Messages;
+use messages::{MessageChannel, Messages};
 
 #[main]
 async fn main() {
@@ -17,20 +21,26 @@ async fn main() {
         .await
         .expect("Error in logger initialization");
 
-    let mut chain = ComponentChain::new(100)
-        .add_cmp(cmp_redis_subscriber::create(cmp_redis_subscriber::Config {
-            url: config.redis_url(),
-            redis_channel: config.redis_channel.clone(),
-        }))
-        .add_cmp(cmp_websocket_server::new(cmp_websocket_server::Config {
-            port: config.websocket_server_port,
-            fn_send_to_client: |msg: Messages| msg.to_json().ok(),
-            fn_recv_from_client: |data: &str| Messages::from_json(data).ok(),
-        }))
-        .add_cmp(cmp_redis_publisher::create(cmp_redis_publisher::Config {
-            url: config.redis_url(),
-            redis_channel: config.redis_channel,
-        }));
+    let redis_config = cmp_redis_client::Config {
+        url: config.redis_url(),
+        subscription_channel: MessageChannel::Output,
+        fn_input: |_| vec![MessageChannel::Output],
+    };
 
-    chain.spawn().await;
+    let ws_server_config = cmp_websocket_server::Config {
+        port: config.websocket_server_port,
+        fn_input: |msg: &Messages| msg.to_json().ok(),
+        fn_output: |data: &str| Messages::from_json(data).ok(),
+    };
+
+    let mut chain = ComponentCollection::new(
+        100,
+        vec![
+            cmp_redis_client::new(redis_config),
+            cmp_websocket_server::new(ws_server_config),
+        ],
+    );
+    let result = chain.spawn().await;
+    error!("{:?}", result);
+    sleep(Duration::from_secs(2)).await;
 }

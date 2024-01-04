@@ -1,3 +1,5 @@
+// zellij --layout zellij-target.kdl
+
 layout {
     default_tab_template {
         pane size=1 borderless=true {

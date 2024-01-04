@@ -5,8 +5,9 @@ edition = "2021"
 
 
 [dependencies]
+tracing-subscriber = "*"
 serde = { version = "1", features = ["derive"] }
 url = { version = "2.4", features = ["serde"] }
 
 # TODO - перенести в rsiot
-rsiot-env-vars = { version = "0.0.16" }
+rsiot = { version = "0.0.31", features = ["env-vars"] }

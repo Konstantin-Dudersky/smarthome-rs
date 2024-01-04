@@ -1,10 +1,16 @@
-use tokio::main;
-use tracing::Level;
+use rsiot::{
+    component_core::ComponentCollection,
+    components::{cmp_redis_client, cmp_timescaledb_storing},
+};
+use tokio::{
+    main,
+    time::{sleep, Duration},
+};
+use tracing::{error, Level};
 
 use env_vars::{load_config, Config};
 use logging::configure_logging;
-use messages::Messages;
-use rsiot::{cmp_redis_subscriber, cmp_timescaledb_storing, component::ComponentChain};
+use messages::{MessageChannel, Messages};
 
 #[main]
 async fn main() {
@@ -14,16 +20,25 @@ async fn main() {
         .await
         .expect("Error in logger initialization");
 
-    let mut chain = ComponentChain::<Messages>::new(100)
-        .add_cmp(cmp_redis_subscriber::create(cmp_redis_subscriber::Config {
-            url: config.redis_url(),
-            redis_channel: config.redis_channel.clone(),
-        }))
-        .add_cmp(cmp_timescaledb_storing::new(
-            cmp_timescaledb_storing::Config {
-                connection_string: config.db_data_url(),
-            },
-        ));
+    let redis_config = cmp_redis_client::Config {
+        url: config.redis_url(),
+        subscription_channel: MessageChannel::Output,
+        fn_input: |_| vec![MessageChannel::Output],
+    };
 
-    chain.spawn().await;
+    let timescaledb_config = cmp_timescaledb_storing::Config {
+        connection_string: config.db_data_url(),
+    };
+
+    let mut chain = ComponentCollection::<Messages>::new(
+        100,
+        vec![
+            cmp_redis_client::new(redis_config),
+            cmp_timescaledb_storing::new(timescaledb_config),
+        ],
+    );
+
+    let result = chain.spawn().await;
+    error!("{:?}", result);
+    sleep(Duration::from_secs(2)).await;
 }

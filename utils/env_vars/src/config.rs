@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use url::Url;
 
-use rsiot_env_vars::IEnvVars;
+use rsiot::env_vars::IEnvVars;
 
 /// Настройки системы
 #[derive(Clone, Debug, Deserialize, Serialize)]

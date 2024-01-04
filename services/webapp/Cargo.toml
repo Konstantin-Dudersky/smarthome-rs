@@ -5,10 +5,10 @@ edition = "2021"
 
 
 [dependencies]
-gloo = { version = "0.10", features = ["console", "net", "utils"] }
-leptos = { version = "0.5.2", features = ["csr", "tracing"] }
-leptos_router = { version = "0.5.2", features = ["csr"] }
-rsiot = { version = "0.0.16", features = [] }
+gloo = { version = "0.11", features = ["console", "net", "utils"] }
+leptos = { version = "0.5.4", features = ["csr", "tracing", "nightly"] }
+leptos_router = { version = "0.5.4", features = ["csr"] }
+rsiot = { version = "0.0.31", features = [] }
 tracing = { version = "0.1.40" }
 tracing-subscriber = { version = "0.3.18" }
 url = { version = "2.4", features = ["serde"] }

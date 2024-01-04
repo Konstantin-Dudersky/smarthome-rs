@@ -6,6 +6,6 @@ edition = "2021"
 [dependencies]
 futures-util = { version = "0.3" }
 gloo = { version = "0.10", features = ["console", "net", "utils"] }
-leptos = { version = "0.5.2", features = ["csr", "tracing"] }
+leptos = { version = "0.5.4", features = ["csr", "tracing", "nightly"] }
 url = { version = "2.4", features = ["serde"] }
 web-sys = { version = "0.3", features = ["Location", "Window"] }

@@ -4,10 +4,9 @@ version = "0.0.1"
 edition = "2021"
 
 [dependencies]
-openssl = { version = "0.10.60", features = ["vendored"] }
-rsiot = { version = "0.0.16", features = [
-    "redis-publisher",
-    "redis-subscriber",
+openssl = { version = "0.10.62", features = ["vendored"] }
+rsiot = { version = "0.0.31", features = [
+    "redis-client",
     "timescaledb-storing",
 ] }
 tracing = { version = "0.1" }

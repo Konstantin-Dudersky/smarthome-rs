@@ -5,11 +5,7 @@ edition = "2021"
 
 [dependencies]
 openssl = { version = "0.10", features = ["vendored"] }
-rsiot = { version = "*", features = [
-    "http-server",
-    "redis-publisher",
-    "redis-subscriber",
-] }
+rsiot = { version = "0.0.31", features = ["http-server", "redis-client"] }
 tokio = { version = "1", features = ["full"] }
 tracing = { version = "0.1.40" }
 

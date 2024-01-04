@@ -1,0 +1,11 @@
+meta {
+  name: -sensors
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{ _.deconz_hub_host }}:{{ _.deconz_hub_port_api }}/api/{{ _.deconz_hub_api_key }}/sensors
+  body: none
+  auth: none
+}

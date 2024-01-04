@@ -23,7 +23,7 @@ targets = ["wasm32-unknown-unknown"]
 
 Запуск для отладки:
 
-```
+```bash
 trunk serve --open
 ```
 

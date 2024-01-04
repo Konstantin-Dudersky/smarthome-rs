@@ -1,4 +1,4 @@
-use rsiot_env_vars::env_vars_cli;
+use rsiot::env_vars::env_vars_cli;
 
 use env_vars::Config;
 
