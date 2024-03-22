@@ -1,3 +1,4 @@
-/style
+/dist/
+/target/
+/Cargo.lock
 /node_modules
-/for_prettier_format.html

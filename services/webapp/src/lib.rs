@@ -1,9 +1,5 @@
-mod global_navigation;
-mod msg_data;
-mod shell;
-
-// pub mod api;
-
-pub use global_navigation::GlobalNavigation;
-pub use msg_data::{process_ws_message, MsgData};
-pub use shell::ApplicationShell;
+pub mod app;
+pub mod cmp_websocket_client_wasm;
+pub mod component;
+pub mod message;
+mod nav;

@@ -1,34 +1,7 @@
-## Подготовка
+# Tauri + Leptos
 
-Установить инструменты
+This template should help get you started developing with Tauri and Leptos.
 
-```bash
-cargo install trunk
-rustup target add wasm32-unknown-unknown
-```
+## Recommended IDE Setup
 
-Установить пакеты
-
-```bash
-npm install
-```
-
-В файле `.cargo/config.toml`:
-
-```toml
-[toolchain]
-channel = "nightly"
-targets = ["wasm32-unknown-unknown"]
-```
-
-Запуск для отладки:
-
-```bash
-trunk serve --open
-```
-
-Сборка в релиз:
-
-```bash
-npx tailwindcss -o ./style/output.css --minify | trunk build --release
-```
+[VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).

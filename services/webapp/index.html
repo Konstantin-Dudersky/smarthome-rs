@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-white">
+<html class="dark">
   <head>
     <meta charset="utf-8" />
+    <title>Tauri + Leptos App</title>
+    <link data-trunk rel="copy-dir" href="public" />
     <link data-trunk rel="rust" data-wasm-opt="z" />
-    <link data-trunk rel="css" href="/style/output.css" />
+
+    <!-- Подключаем стили, которые компилирует Tailwind -->
+    <link data-trunk rel="tailwind-css" href="input.css" />
+
+    <!-- Подключаем tw-elemets -->
     <link
       data-trunk
       rel="copy-file"
-      href="./node_modules/@fortawesome/fontawesome-free/js/all.min.js"
+      href="./node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
     />
-    <script defer src="all.min.js"></script>
-    <title>demo Siemens to web</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-
-  <body class="h-full"></body>
 </html>
